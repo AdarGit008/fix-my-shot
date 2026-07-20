@@ -93,7 +93,7 @@ Foot stagger/turn-out · shoulder/hip rotation ("squaring") · shoulder/upper-ar
 
 ## Excluded (out of scope, folklore, or non-discriminating — not graded)
 - **Ball trajectory / entry angle / depth / left-right / make probability** — flight & aim; out of scope. (Release *angle* doesn't distinguish makes.)
-- **Backspin rate & spin-axis direction** — ball-flight outcomes; only the static hand+ball geometry that *produces* backspin is in scope.
+- **Spin-axis direction & measured in-flight spin** — ball-flight measurements, not read from a static pose. *(Backspin **rate** is **not** excluded — it should be accounted for; deriving a static proxy/estimate for it from hand-finger-wrist-ball geometry is a forward research task → open gaps / issue #3.)*
 - **Ground-reaction-force magnitude** — a force, not pose-readable, and n.s. by skill.
 - **Quiet-eye duration / variability, shot tempo, joint & COM velocities, one-motion pause detection, inter-segment timing** — temporal; need video, not a frame.
 - **Rim aiming point** — needs eye-tracking; head orientation too coarse.
@@ -105,7 +105,7 @@ Foot stagger/turn-out · shoulder/hip rotation ("squaring") · shoulder/upper-ar
 Joint angles as 3-point angles on skeleton keypoints; segment-vs-gravity angles using the floor plane as reference; balance by projecting the COM to the floor and testing it inside the foot-contact polygon; foot-floor contact by which soles touch and whether heels are lifted (judged against the detected phase); ball position as the floor-referenced centroid height (÷ stature) and its location vs head/eye landmarks and the eye→hoop line (position, never flight); hand/ball geometry from the contact region (palm gap, pad vs palm, finger spread, index vs midline, guide-hand side, hand twist about the vertical target plane).
 
 ## Open gaps → issue #3
-Wrist-cock & release-flexion ranges · elbow-flare threshold · set-point elbow band · stance-width normalization basis + turn-out/lead ranges · load-depth band without shot-distance · phase-boundary heel-off rule · ball-gap/finger-spread in defensible units + backspin static-proxy reliability · guide-hand separation criterion. Each needs an evidence-backed range or an explicit deferral.
+Wrist-cock & release-flexion ranges · elbow-flare threshold · set-point elbow band · stance-width normalization basis + turn-out/lead ranges · load-depth band without shot-distance · phase-boundary heel-off rule · ball-gap/finger-spread in defensible units · guide-hand separation criterion · **backspin rate — how to account for it in the score from static hand/finger/wrist/ball geometry (a "produced-backspin" proxy) so it factors in rather than being ignored**. Each needs an evidence-backed range/proxy or an explicit deferral.
 
 ## Provenance
 Derived in research batch 3 (phase taxonomy → 6 kinetic-chain/BEEF region lenses → per-range cross-verification → synthesis). Sources are cited per claim in the batch record; the load-bearing verified set and the refuted/dropped claims are summarized in [research/evidence.md](research/evidence.md).
