@@ -6,6 +6,7 @@
 
   "sources_of_truth": {
     "status": "derived — baseline orient (never a hand-maintained status doc)",
+    "spec": "docs/SPEC.md",
     "decisions": "docs/decisions/",
     "changes": "CHANGELOG.md",
     "readiness": "node check.mjs --repo ."

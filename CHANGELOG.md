@@ -8,6 +8,13 @@ release.
 ## [Unreleased]
 
 ### Added
+- **Spec of record** for the fix-my-shot product concept
+  ([docs/SPEC.md](docs/SPEC.md)) with explicit acceptance criteria, backed by
+  decision records [ADR-0002](docs/decisions/0002-product-definition.md)…[ADR-0006](docs/decisions/0006-sport-agnostic-seam.md)
+  and a cross-verified research evidence base ([docs/research/evidence.md](docs/research/evidence.md)).
+  Core reframe: grade a shooting-form **pose** (any phase) against research-derived
+  principle-ranges — training **execution, not aim** — on a physically-real
+  body+ball+floor; no ball-trajectory or make/miss simulation.
 - Adopted the [project-baseline](https://github.com/AdarGit008/baseline-skill)
   readiness standard (`baseline.repo.json`, `type: docs`, multi-lane workflow) —
   see [ADR-0001](docs/decisions/0001-adopt-baseline.md).
