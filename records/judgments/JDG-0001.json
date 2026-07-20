@@ -1,0 +1,10 @@
+{
+  "record": "judgment/1",
+  "id": "JDG-0001",
+  "kind": "sign-off",
+  "date": "2026-07-20",
+  "by": "Adar",
+  "subject": "CTX-04",
+  "reason": "Ideation-phase repo: no frozen/consolidated specs exist, so there is nothing to regenerate from sources or stamp with supersede banners. Re-evaluate when the first consolidated spec is written.",
+  "review_by": "2026-10-20"
+}

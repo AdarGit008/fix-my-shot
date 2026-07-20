@@ -1,0 +1,22 @@
+# Baseline scrub cache (non-lossy draft cache — never commit)
+.baseline/cache/
+
+# Personal, per-machine Claude Code settings (project settings.json IS committed)
+.claude/settings.local.json
+
+# Secrets / env
+.env
+.env.*
+!.env.example
+
+# Dependencies / build output (present once code lands)
+node_modules/
+dist/
+build/
+*.pyc
+__pycache__/
+.venv/
+
+# OS / editor cruft
+.DS_Store
+*.swp

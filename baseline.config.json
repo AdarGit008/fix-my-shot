@@ -1,0 +1,14 @@
+{
+  "_help": "Baseline check tuning for fix-my-shot. Identity/posture lives in baseline.repo.json; this file tunes paths/commands/thresholds. Keys starting with _ are notes and ignored.",
+
+  "makes_external_claims": false,
+  "_makes_external_claims": "No external/competitive claims yet — CLAIM-* stay off. Flip to true (and add records/claims/CLM-*.json) when the product makes claims.",
+
+  "sources_of_truth": {
+    "status": "derived — baseline orient (never a hand-maintained status doc)",
+    "decisions": "docs/decisions/",
+    "changes": "CHANGELOG.md",
+    "readiness": "node check.mjs --repo ."
+  },
+  "_sources_of_truth": "CTX-03: each fact class has one canonical home. Add product-definition homes here as they are created."
+}

@@ -1,0 +1,10 @@
+# Code ownership — routes reviews to the accountable owner (GOV-03).
+# Syntax: <path pattern>  <owner…>   See https://docs.github.com/articles/about-code-owners
+
+# Default owner for everything in this repo.
+*                       @AdarGit008
+
+# Quality/governance infrastructure — same owner today; split out as the team grows.
+/baseline.repo.json     @AdarGit008
+/baseline.config.json   @AdarGit008
+/docs/decisions/        @AdarGit008
