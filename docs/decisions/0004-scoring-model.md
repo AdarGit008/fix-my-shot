@@ -17,10 +17,11 @@ The score is the report; mis-weighting it makes the product confidently wrong. R
 - **Fix hierarchy = HYBRID.** The engine computes per-pose leverage (differentiable sensitivity of the form score to each parameter); it is **stability-gated, grouped into coach-meaningful clusters (BEEF-style), and re-labeled in expert vocabulary.** Not raw gradients (unstable → teaches noise); not a fixed expert ranking (state-blind — can't say "for *this* pose, fix X first").
 - **Leverage robustness:** pose parameters are geometrically coupled, so single-fix attribution is made robust (grouped, conditional on coupled params, suppressed when a ranking flips under a small pose perturbation) and validated against empirical predictors.
 - Score is **form quality**, not make probability (ADR-0002).
+- **Instantiation:** the concrete baseline — the phase taxonomy, per-phase principle ranges, and the `written-in-stone` / `style-tolerant` / `excluded` lists — lives in [docs/principles-baseline.md](../principles-baseline.md) (derived + cross-verified, research batch 3). It is the scorer's single source of truth; open numeric gaps are tracked in issue #3.
 
 ## Consequences
 
 - Avoids the false-precision trap by grading ranges + repeatable mechanics, never conformance to one ideal.
-- **The baseline itself is not yet derived** — building and validating the phase-aware principle-ranges is the next research/definition deliverable (open question).
+- **The baseline is now derived** ([docs/principles-baseline.md](../principles-baseline.md)) and turned out deliberately **small on written-in-stone** — the non-negotiables are structural (balance, ground contact, kinetic-chain sequencing, phase-appropriate extension, and consistency-over-conformance), while most specific joint angles are wide guideline/style bands because the evidence shows they do not discriminate skill. Remaining numeric gaps (issue #3) still need instrumented ranges.
 - The leverage layer is the riskiest piece: without robustness gating it can teach noise, corroding the stable mental model that is the moat.
 - Backspin is scored from hand/finger/wrist placement + ball touch points (form), consistent with ADR-0003.
