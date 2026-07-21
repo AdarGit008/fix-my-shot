@@ -14,10 +14,10 @@ the [CHANGELOG](CHANGELOG.md).
 
 ## Supported versions
 
-This project is in an early **ideation / prototype** phase and has not cut a
-release. There is no supported release line yet; the default branch (`main`) is
-the only line that receives fixes. This section will be updated when the first
-version is tagged.
+This project is in a **pre-release prototype** phase (product defined, no code
+released) and has not cut a release. There is no supported release line yet; the
+default branch (`main`) is the only line that receives fixes. This section will
+be updated when the first version is tagged.
 
 | Version | Supported |
 | ------- | --------- |

@@ -7,7 +7,9 @@
   "sources_of_truth": {
     "status": "derived — baseline orient (never a hand-maintained status doc)",
     "spec": "docs/SPEC.md",
+    "principles": "docs/principles-baseline.md",
     "decisions": "docs/decisions/",
+    "research": "docs/research/",
     "changes": "CHANGELOG.md",
     "readiness": "node check.mjs --repo ."
   },

@@ -1,0 +1,10 @@
+{
+  "record": "judgment/1",
+  "id": "JDG-0002",
+  "kind": "sign-off",
+  "date": "2026-07-21",
+  "by": "Adar",
+  "subject": "CTX-04",
+  "reason": "Re-evaluated: the JDG-0001 trigger fired — the first consolidated spec (docs/SPEC.md) now exists. CTX-04 is satisfied DIRECTLY, not by waiver: SPEC.md and principles-baseline.md are the frozen/consolidated docs and each carries its regeneration provenance inline (Grounded-in research batches, links to the ADRs that decide each section, and the cross-verified evidence base), and every superseded posture is banner-linked (ADR-0001 amendment; ADR-0003/0004 refined by ADR-0007/0008/0009). Supersedes JDG-0001's ideation-phase waiver.",
+  "review_by": "2026-10-20"
+}
