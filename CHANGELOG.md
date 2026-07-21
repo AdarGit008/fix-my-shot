@@ -8,6 +8,11 @@ release.
 ## [Unreleased]
 
 ### Added
+- Governance hardening ahead of first code (2026-07-21, founder-approved):
+  Dependabot config (`.github/dependabot.yml`, activates as manifests land) and
+  a `main` branch ruleset (PRs required, force-push blocked, conversation
+  resolution) — see the dated amendment in
+  [ADR-0001](docs/decisions/0001-adopt-baseline.md).
 - **Spec of record** for the fix-my-shot product concept
   ([docs/SPEC.md](docs/SPEC.md)) with explicit acceptance criteria, backed by
   decision records [ADR-0002](docs/decisions/0002-product-definition.md)…[ADR-0006](docs/decisions/0006-sport-agnostic-seam.md)

@@ -43,6 +43,12 @@ Infrastructure wired: a SessionStart `orient` hook (`.claude/settings.json`, rep
 - **Deferred honestly:** `SEC-05` (dependency-update bot) stays a WARN — there
   are zero dependencies to update; wiring Dependabot now would be presence
   theater. It activates when a manifest lands.
+  - *Amended 2026-07-21 (founder-approved):* with the spec accepted and first
+    code imminent, `.github/dependabot.yml` is committed ahead of the first
+    manifest (it activates per-ecosystem as manifests land), and a `main`
+    ruleset (PRs required, force-push blocked, conversation resolution) is
+    enabled now rather than waiting for CI; the required baseline check is
+    added to the ruleset when CI exists.
 - **Cost:** the docs-first posture is a temporary scaffold. The `type: docs`
   decision must be revisited (and this ADR superseded) the moment real code is
   added, or the build/test rules will stay wrongly dormant.
