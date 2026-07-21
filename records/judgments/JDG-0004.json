@@ -1,0 +1,10 @@
+{
+  "record": "judgment/1",
+  "id": "JDG-0004",
+  "kind": "sign-off",
+  "date": "2026-07-21",
+  "by": "Adar",
+  "subject": "TEST-03",
+  "reason": "Red-on-arrival guard wired: test/core-seam.test.ts fails if any sport term appears in packages/core/src or if core imports a sport plugin (ADR-0006). Verified red-on-arrival during scaffolding (issue #5).",
+  "review_by": "2027-07-21"
+}

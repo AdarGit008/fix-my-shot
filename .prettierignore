@@ -1,0 +1,14 @@
+dist
+build
+coverage
+node_modules
+package-lock.json
+
+# Prose, decisions, and append-only records are hand-authored, not Prettier-managed.
+# (Reformatting records/ would violate REC-01's append-only invariant.)
+*.md
+docs/
+records/
+LICENSE
+CODEOWNERS
+.github/dependabot.yml

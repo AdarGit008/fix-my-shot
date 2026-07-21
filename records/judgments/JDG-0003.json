@@ -1,0 +1,10 @@
+{
+  "record": "judgment/1",
+  "id": "JDG-0003",
+  "kind": "sign-off",
+  "date": "2026-07-21",
+  "by": "Adar",
+  "subject": "baseline.repo.json",
+  "reason": "Flip type: docs -> node in the first-code PR (issue #5), as pre-authorized by ADR-0001 (posture clause) and realized by ADR-0007. Strengthens posture (activates build/test/repro/lint rules); no axis weakened.",
+  "review_by": "2027-07-21"
+}

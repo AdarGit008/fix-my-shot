@@ -1,0 +1,64 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Least-privilege token (SEC-11): CI only needs to read the checked-out code.
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      # Secret-scanning gate (SEC-12): fails the build if a secret ever lands.
+      # Pinned gitleaks binary; --no-git scans the working tree and respects .gitignore.
+      - name: Secret scan (gitleaks)
+        env:
+          GITLEAKS_VERSION: '8.30.1'
+        run: |
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" -o /tmp/gitleaks.tar.gz
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+          /tmp/gitleaks detect --no-git --source . --redact --no-banner
+
+      - name: Install dependencies (frozen lockfile)
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      # Governance gate: run the pinned project-baseline checker against the repo.
+      # The checker lives in its own repo; fetch it at a pinned commit (no vendoring).
+      # --no-exec skips re-running the bootstrap command — the real install/lint/test
+      # above already exercised it — so this step evaluates the structural rules and
+      # fails the job on any blocker.
+      - name: Fetch pinned baseline checker
+        run: |
+          BL="$RUNNER_TEMP/baseline-skill"
+          git init -q "$BL"
+          git -C "$BL" remote add origin https://github.com/AdarGit008/baseline-skill
+          git -C "$BL" fetch -q --depth 1 origin 2aa80a0b6beb6102fd2ef218d801699c771a8f39
+          git -C "$BL" checkout -q FETCH_HEAD
+
+      - name: Baseline readiness check
+        run: node "$RUNNER_TEMP/baseline-skill/baseline.mjs" check --repo . --no-exec

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "_comment": "Whole-repo type-check surface (npm run typecheck -> tsc --noEmit). Cross-package imports resolve through each workspace's package.json exports -> src (bundler resolution), so no project references are needed at this scaffold stage.",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node", "vite/client"]
+  },
+  "include": [
+    "packages/*/src/**/*",
+    "apps/*/src/**/*",
+    "test/**/*",
+    "vitest.config.ts",
+    "apps/*/vite.config.ts"
+  ]
+}

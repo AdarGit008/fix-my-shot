@@ -4,6 +4,9 @@
   "makes_external_claims": false,
   "_makes_external_claims": "No external/competitive claims yet — CLAIM-* stay off. Flip to true (and add records/claims/CLM-*.json) when the product makes claims.",
 
+  "bootstrap_command": "npm ci && npm run typecheck && npm test",
+  "_bootstrap_command": "BUILD-05 crown check: frozen install + whole-repo typecheck + the Vitest suite on a clean checkout. `npm run build` (Vite) runs as its own CI step, not here.",
+
   "sources_of_truth": {
     "status": "derived — baseline orient (never a hand-maintained status doc)",
     "spec": "docs/SPEC.md",

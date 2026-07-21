@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "type": "docs",
+  "type": "node",
   "lifecycle": "experimental",
   "maturity": "prototype",
   "workflow": "multi-lane",

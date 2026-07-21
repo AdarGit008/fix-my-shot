@@ -1,0 +1,4 @@
+# Offline MJX pose pipeline (ADR-0003 / ADR-0007). Pinned when the generator lands (issue #8).
+# jax
+# mujoco
+# mujoco-mjx

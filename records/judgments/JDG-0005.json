@@ -1,0 +1,10 @@
+{
+  "record": "judgment/1",
+  "id": "JDG-0005",
+  "kind": "sign-off",
+  "date": "2026-07-21",
+  "by": "Adar",
+  "subject": "TEST-04",
+  "reason": "Issue #5 acceptance reconciled against the scaffold: whole-repo typecheck green, 24 Vitest tests pass, Vite build succeeds; scorer/report fields (FormGrade, Deduction, PrincipleRange) match core type defs across the package seam (issue #5).",
+  "review_by": "2027-07-21"
+}

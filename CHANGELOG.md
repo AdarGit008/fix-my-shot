@@ -8,6 +8,13 @@ release.
 ## [Unreleased]
 
 ### Added
+- **Monorepo scaffold — first code** (2026-07-21, issue #5): the TypeScript + Vite +
+  npm-workspaces monorepo per [ADR-0007](docs/decisions/0007-app-stack-and-layout.md) —
+  `apps/web` (Vite + React shell), `packages/{core,basketball,scoring}` (the ADR-0006
+  seam made physical, with a red-on-arrival guard keeping `core` sport-agnostic), and the
+  `tools/posegen` Python skeleton. Root toolchain (TypeScript strict, ESLint incl. the
+  core→plugin import boundary, Prettier, Vitest), a `ci` workflow (lint · typecheck ·
+  test · build · SHA-pinned baseline check), plus `.env.example`, `.nvmrc`, and `bin/setup`.
 - **Build-kickoff decision records** (2026-07-21): [ADR-0007](docs/decisions/0007-app-stack-and-layout.md)
   (TypeScript + React + three.js + Vite monorepo; `@mujoco/mujoco` runtime; package
   seam; MJX pose pipeline; minimal persistence), [ADR-0008](docs/decisions/0008-score-semantics.md)
@@ -45,6 +52,11 @@ release.
   and a committed pre-push secret-scrub hook (`hooks/scrub-pre-push.sh`).
 
 ### Changed
+- **Flipped `baseline.repo.json` `type: docs → node`** in the same PR as first code
+  (issue #5): the build, test, reproducibility, and lint baseline rules are now live.
+  [ADR-0007](docs/decisions/0007-app-stack-and-layout.md) now supersedes
+  [ADR-0001](docs/decisions/0001-adopt-baseline.md)'s `type: docs` posture clause; the
+  descriptor change carries its DESC-03 judgment in this PR.
 - Closed the issue-#3 numeric gaps in the principles baseline (research batch 4,
   cross-verified): pinned ranges (elbow flare, stance-width stature-normalization),
   static proxies (wrist-cock direction, load presence/coherence/symmetry,
