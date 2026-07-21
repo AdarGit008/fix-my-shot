@@ -1,8 +1,13 @@
-# Dependabot — configured ahead of the first dependency manifests (2026-07-21,
-# founder-approved; supersedes the ADR-0001 "presence theater" deferral now that
-# code lands next). Each ecosystem entry activates the moment its manifest
-# exists; until then Dependabot reports "no manifest found" for it, which is
-# expected and harmless.
+# Dependabot — npm (root manifest; npm workspaces cover apps/* and packages/*)
+# + github-actions. Wired 2026-07-21 ahead of the first manifests (founder-
+# approved; supersedes the ADR-0001 "presence theater" deferral).
+#
+# Correction for the record: a configured ecosystem whose manifest does not exist
+# yet produces a FAILED update run (red in the Actions tab), NOT a silent "no
+# manifest found" skip. The pre-scaffold runs on 2026-07-21 failed exactly this
+# way ("/package.json not found"; "/action.yml or /.github/workflows/<anything>.yml
+# not found"). Both manifests now exist as of the #5 scaffold, so scheduled runs
+# resolve green — no config change was needed.
 version: 2
 updates:
   - package-ecosystem: "npm"
