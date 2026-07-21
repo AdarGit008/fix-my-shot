@@ -1,18 +1,27 @@
 # fix-my-shot
 
-> **Status: ideation / definitions phase.** The name is a placeholder and the
-> scope is still being defined. There is no application code yet — this repo
-> currently holds the project's definitions, decisions, and quality
-> infrastructure. Product code will land once the concept is nailed down.
+> **Status: product DEFINED, pre-build.** The spec of record, the decision log
+> (ADR-0002…0009), and the scorer's principle baseline are merged to `main`.
+> There is no application code **yet** — the next step is build kickoff, at which
+> point the repo's `type` flips from `docs` to the real stack in the first-code PR
+> (per [ADR-0001](docs/decisions/0001-adopt-baseline.md)).
 
 ## What this is
 
-`fix-my-shot` is an early-stage project in its definitions phase. Right now the
-repository is deliberately docs-first: the artifacts that exist are the ones
-that *should* exist before code — a governed decision log, a records ledger,
-and a readiness standard that a machine can check. When the product shape is
-decided it will be captured in an ADR under [`docs/decisions/`](docs/decisions/)
-and the repo's `type` will flip from `docs` to the real stack.
+`fix-my-shot` is an off-court basketball **shot-form trainer**: it generates a
+physically-real body+ball+floor **pose**, lets you fix the posture, re-grades the
+**form** against a research-derived baseline of shooting principles, and reports
+the ranked fixes — training **execution, not aim**; no ball flight, no make/miss
+([docs/SPEC.md](docs/SPEC.md)). Everything load-bearing is decided and captured:
+
+- **[docs/SPEC.md](docs/SPEC.md)** — the spec of record (scope, scene, acceptance criteria).
+- **[docs/principles-baseline.md](docs/principles-baseline.md)** — the scorer's single source of truth (phase-aware principle ranges, cross-verified).
+- **[docs/decisions/](docs/decisions/)** — ADR-0002…0009 (product, engine, scoring, positioning, sport seam, stack/layout, score semantics, scene/lifecycle).
+- **[docs/research/](docs/research/)** — the cross-verified evidence base and the open-source landscape.
+
+The repo is still deliberately docs-first: a governed decision log, a records
+ledger, and a machine-checkable readiness standard — the artifacts that *should*
+exist before code.
 
 ## Getting started
 
@@ -26,8 +35,8 @@ There is nothing to install or run yet. To work in this repo today:
    ```bash
    node "$HOME/.claude/skills/baseline/check.mjs" --repo .
    ```
-3. **Read the decisions.** Start with
-   [`docs/decisions/0001-adopt-baseline.md`](docs/decisions/0001-adopt-baseline.md).
+3. **Read the definitions.** Start with [`docs/SPEC.md`](docs/SPEC.md), then the
+   decisions from [`docs/decisions/0001-adopt-baseline.md`](docs/decisions/0001-adopt-baseline.md).
 
 ## How this repo is governed
 

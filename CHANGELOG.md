@@ -8,6 +8,22 @@ release.
 ## [Unreleased]
 
 ### Added
+- **Build-kickoff decision records** (2026-07-21): [ADR-0007](docs/decisions/0007-app-stack-and-layout.md)
+  (TypeScript + React + three.js + Vite monorepo; `@mujoco/mujoco` runtime; package
+  seam; MJX pose pipeline; minimal persistence), [ADR-0008](docs/decisions/0008-score-semantics.md)
+  (0–100 form grade — not a probability; gate + weighted deductions; interactive
+  finite-difference leverage with MJX as the offline oracle), and
+  [ADR-0009](docs/decisions/0009-scene-pose-lifecycle-gate.md) (virtual target;
+  MJX pose library + fault injection; phase labeled-at-generation with bounded
+  editing; the physical-validity gate; report structure).
+- **Principles baseline** ([docs/principles-baseline.md](docs/principles-baseline.md)),
+  the phase-aware form scorer instantiating [ADR-0004](docs/decisions/0004-scoring-model.md):
+  5-phase taxonomy, tiered per-phase principle ranges, honest excluded list, and a
+  static **produced-backspin** proxy in place of an in-flight spin rate.
+- **Open-source landscape** ([docs/research/oss-landscape.md](docs/research/oss-landscape.md)):
+  13 repos deep-read across (a) form grading, (b) shot simulation, (c) reusable
+  physics/pose/IK code — a sanity check (nobody grades an editable simulated pose)
+  and the code-reuse shortlist for the engine/gate build.
 - Governance hardening ahead of first code (2026-07-21, founder-approved):
   Dependabot config (`.github/dependabot.yml`, activates as manifests land) and
   a `main` branch ruleset (PRs required, force-push blocked, conversation
@@ -27,5 +43,23 @@ release.
   `baseline.config.json`, and a `records/` ledger.
 - Baseline infrastructure: SessionStart `orient` hook (`.claude/settings.json`)
   and a committed pre-push secret-scrub hook (`hooks/scrub-pre-push.sh`).
+
+### Changed
+- Closed the issue-#3 numeric gaps in the principles baseline (research batch 4,
+  cross-verified): pinned ranges (elbow flare, stance-width stature-normalization),
+  static proxies (wrist-cock direction, load presence/coherence/symmetry,
+  guide-hand, produced-backspin), and honest deferrals (wrist-release-flexion
+  angle, set-elbow band, heel-off boundary, ball-to-palm gap in units).
+- Re-verification pass on the evidence base: three claims downgraded CONFIRMED →
+  PARTIAL and corrected in place (contact-artifact localization, "competitors"
+  framing, self-controlled-feedback scope); dropped several false-precision
+  baseline numbers (shoulder 59.7–85.3°, head ±15°, head-tilt 10–15°, hip 160°
+  upper bound).
+- Reconciled cross-document drift for build kickoff: SPEC and ADR-0002/0003/0004
+  updated to the derived baseline, the 5-phase taxonomy, the 0–100 grade, and the
+  virtual target; README/SECURITY moved from "ideation" to "defined, pre-build".
+- Re-evaluated the CTX-04 sign-off ([JDG-0002](records/judgments/JDG-0002.json)):
+  its trigger fired (the consolidated spec now exists), superseding the JDG-0001
+  ideation-phase waiver.
 
 [Unreleased]: https://github.com/AdarGit008/fix-my-shot/commits/main

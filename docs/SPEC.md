@@ -1,20 +1,21 @@
 # fix-my-shot — Spec of Record
 
-**Version:** 0.1 (draft for review) · **Phase:** definitions → spec · **Lane:** `lane/1` (issue #1) · **Date:** 2026-07-20
+**Version:** 0.2 — accepted, on `main` · **Phase:** pre-build (spec merged, no code yet) · **Date:** 2026-07-21
 
-Grounded in two cross-verified research batches — see [research/evidence.md](research/evidence.md).
-Load-bearing decisions recorded as [ADR-0002](decisions/0002-product-definition.md) … [ADR-0006](decisions/0006-sport-agnostic-seam.md).
+Grounded in cross-verified research batches — see [research/evidence.md](research/evidence.md).
+Load-bearing decisions recorded as [ADR-0002](decisions/0002-product-definition.md) … [ADR-0009](decisions/0009-scene-pose-lifecycle-gate.md).
+The scorer's single source of truth is [principles-baseline.md](principles-baseline.md) (the derived, phase-aware principle set).
 Baseline posture unchanged (`type: docs` until first code lands — see [ADR-0001](decisions/0001-adopt-baseline.md)).
 
 ---
 
 ## 1. What it is (and is not)
 
-fix-my-shot grades the quality of a **shooting-form pose** — a single captured moment of form, at **any phase** of the shot (wind-up, set point, release, follow-through) — against a **research-derived baseline of shooting principles**, on a **physically-real body + ball + floor** simulation. The user fixes the pose in a UI; the form is re-graded; a report surfaces what to fix.
+fix-my-shot grades the quality of a **shooting-form pose** — a single captured moment of form, at **any phase** of the shot (the 5-phase taxonomy in [principles-baseline.md](principles-baseline.md): stance / dip / loading / set-release / follow-through) — against a **research-derived baseline of shooting principles**, on a **physically-real body + ball + floor** simulation. The user fixes the pose in a UI; the form is re-graded; a report surfaces what to fix.
 
 It trains **execution** — *how to reliably hit what you are aiming at* — **not aim** (*where to send the ball*).
 
-**It is NOT a shot-outcome simulator.** It does **not** simulate ball flight, does **not** decide whether a shot goes in, and does **not** coach aiming or targeting. The score is *the probability that this form contributes to a high-quality, repeatable shot attempt* — a **form-quality grade, not a make probability**.
+**It is NOT a shot-outcome simulator.** It does **not** simulate ball flight, does **not** decide whether a shot goes in, and does **not** coach aiming or targeting. The score is a **0–100 form-quality grade** — an evidence-anchored index of *how well this form embodies the principles*, **not a make probability** (there is no shot outcome in the loop; see [ADR-0008](decisions/0008-score-semantics.md)).
 
 > This is the central reframe (ADR-0002). The earlier research explored ball trajectory / entry-geometry / make-quality (Noah 45/11/0, ballistic flight, drag, rim bounce); that whole layer is **explicitly out of scope**. The research still stands for what it established — the engine choice and the biomechanical parameters — but the product grades *form*, not *outcome*.
 
@@ -30,8 +31,8 @@ Everything else is dressing. The moat is a **trained eye + a mental model of goo
 
 **In scope**
 - One generated state: a **body (player) + ball + floor**. The floor is a fixed ground plane; foot–floor contact and ground reaction are part of the model (base, balance, leg drive, whole kinetic chain).
-- Grading a **static pose** at any shot phase (phase-aware).
-- Backspin **mechanics** assessed from hand / finger / wrist placement and ball orientation / touch points (visible in the pose — no flight needed).
+- Grading a **static pose** at any shot phase (phase-aware; the phase is **labeled at generation** and pinned through edits — [ADR-0009](decisions/0009-scene-pose-lifecycle-gate.md)).
+- Backspin **mechanics** assessed from hand / finger / wrist placement and ball touch-point / contact-region geometry (visible in the pose — no flight needed; a static **produced-backspin** proxy, not a spin rate — see [principles-baseline.md](principles-baseline.md)).
 - A physics engine that holds a realistic pose, enforces physical validity, and measures the form the heuristic grades.
 - Editing the pose (drag joints) behind a physical-validity gate; re-grading; a ranked report.
 - A persistence / progression mechanism (cross-session growth up the fix hierarchy).
@@ -44,11 +45,11 @@ Everything else is dressing. The moat is a **trained eye + a mental model of goo
 
 ## 4. The scene
 
-Exactly three physical elements: **player body**, **ball**, **floor** (fixed ground plane). No environment beyond the floor. Realism lives in the *body+ball+floor state* — honest joint limits, anthropometry, hand–ball contact geometry, and foot–floor ground reaction — **not** in any simulated flight.
+Exactly three physical elements: **player body**, **ball**, **floor** (fixed ground plane), plus one **non-physical reference**: a **fixed virtual target** (direction + nominal free-throw geometry) that orients every "toward-hoop" principle. No environment beyond the floor; nothing travels to the target ([ADR-0009](decisions/0009-scene-pose-lifecycle-gate.md)). Realism lives in the *body+ball+floor state* — honest joint limits, anthropometry, hand–ball contact geometry, and foot–floor ground reaction — **not** in any simulated flight.
 
 ## 5. Physics engine & compute (ADR-0003)
 
-- **Engine = the heart; realism is key** — but "realism" here means a *physically honest pose*, not a simulated shot. The engine (a) represents the body+ball+floor pose realistically, (b) enforces physical validity of edited poses, (c) measures the form quantities the heuristic grades (joint angles, alignment, center-of-mass over base, hand/ball contact → backspin mechanics), and (d) computes the *leverage* of a fix on the form score.
+- **Engine = the heart; realism is key** — but "realism" here means a *physically honest pose*, not a simulated shot. The engine (a) represents the body+ball+floor pose realistically, (b) enforces physical validity of edited poses, (c) measures the form quantities the heuristic grades (joint angles, alignment, center-of-mass over base, **foot–floor ground reaction**, hand/ball contact → backspin mechanics), and (d) computes the *leverage* of a fix on the form score.
 - **Quasi-static, not full live dynamics.** We grade a frozen pose under a feasibility gate; we do not simulate continuous motion or hand–ball grip release. (Confirmed feasible + defensible in batch 2; full live contact-rich dynamics is the field's hardest open problem and unnecessary here.)
 - **No ball trajectory.** The ballistic-flight half of the earlier "quasi-static + ballistic" decision is **removed** by the §1 reframe.
 - **Runtime:** MuJoCo via official WebAssembly build, in-browser, with primitive (capsule/link) rendering — realism over aesthetics. Deterministic.
@@ -63,10 +64,11 @@ Grade a pose against a **research-derived baseline of shooting principles**, pha
 - **Style vs conflict:**
   - **Style** = divergence from the baseline that stays **inside** the range → **allowed, never penalized**.
   - **Conflict** = divergence that falls **outside** the range (breaks a principle) → **penalized**.
-- **Phase-aware:** good form in the wind-up ≠ good form at release; the baseline is defined per phase.
+- **Phase-aware:** good form in the loading phase ≠ good form at release; the baseline is defined per phase (the 5-phase taxonomy in [principles-baseline.md](principles-baseline.md)).
+- **Aggregation = gate + weighted deductions** ([ADR-0008](decisions/0008-score-semantics.md)): a **written-in-stone** violation **caps** the 0–100 grade; **guideline** violations subtract graded, band-width-normalized deductions; in-range **style** is never deducted.
 - **All fixes, ranked.** The report surfaces **every** fix, ranked by leverage. The **top fix** is where growth concentrates; the persistence mechanism walks the user up the hierarchy over repeated use.
 - **Fix hierarchy = HYBRID** (engine + expert): the engine computes per-pose leverage (differentiable sensitivity of the form score to each parameter); this is **stability-gated, grouped into coach-meaningful clusters (BEEF-style: base, eyes, elbow/alignment, follow-through), and re-labeled in expert vocabulary.** Not raw gradients (unstable → teaches noise); not a fixed expert ranking (state-blind — cannot say "for *this* pose, fix X first").
-- **Leverage robustness:** because pose parameters are geometrically coupled, single-fix attribution must be made robust (grouped, conditional on coupled params, suppressed when a ranking flips under a small pose perturbation), or it re-imports false precision.
+- **Leverage robustness:** because pose parameters are geometrically coupled, single-fix attribution must be made robust (grouped, conditional on coupled params, suppressed when a ranking flips under a small pose perturbation, and validated offline against the MJX differentiable oracle — [ADR-0008](decisions/0008-score-semantics.md)), or it re-imports false precision. The interactive leverage signal is in-browser **finite differences** on the analytic form score; MJX gradients validate it offline, never on the interactive path.
 
 ## 7. Positioning & the transfer thesis (ADR-0005)
 
@@ -81,11 +83,13 @@ Basketball is the MVP; the seam is **thin and deliberate**: generic **core types
 
 ## 9. Open questions
 
-- **The baseline itself.** The phase-aware principle-ranges are not yet derived — that is the next research/definition deliverable. Batch 1 surfaced candidate parameters (elbow alignment, knee/hip flexion, base/balance, follow-through, release-height-as-ratio, backspin mechanics) but the *written-in-stone principles* and their ranges must be built and validated.
-- **Pose realizability.** How strictly to constrain an edited pose to one a real body could hold/produce (feasibility manifold) — the single least-studied link.
-- **Phase detection.** How the system knows which phase a captured pose is in (labeled on generation vs inferred).
-- **Persistence mechanism design.** The exact progression/retention loop that walks users up the hierarchy.
-- **In-browser performance budget.** No measured fps/latency for a humanoid+ball+floor WASM scene yet (inferred feasible, not benchmarked).
+**Resolved since v0.1** (now decided — kept here as pointers): the **baseline** is derived and cross-verified ([principles-baseline.md](principles-baseline.md), batches 3–4; issue #3 gaps closed); **phase detection** is sidestepped for v1 — phase is **labeled at generation** and pinned by bounded per-parameter editing, with a frame classifier deferred ([ADR-0009](decisions/0009-scene-pose-lifecycle-gate.md)); **score aggregation** and **interactive leverage** are fixed ([ADR-0008](decisions/0008-score-semantics.md)); **stack + layout** and **v1 persistence** are fixed ([ADR-0007](decisions/0007-app-stack-and-layout.md)).
+
+**Still open:**
+- **Pose realizability (strength).** The MVP validity gate covers joint limits + quasi-static balance + contact-penetration ([ADR-0009](decisions/0009-scene-pose-lifecycle-gate.md)); stricter joint-torque / strength feasibility remains the single least-studied link and is deferred.
+- **Persistence mechanism design (full).** v1 ships `localStorage`-minimal (history, per-principle trend, top-fix continuity); the full cross-session progression/retention loop that walks users up the hierarchy is still to be designed.
+- **In-browser performance budget.** Numeric targets are set in §11.7, but they are **not yet benchmarked** for a humanoid+ball+floor WASM scene (inferred feasible; a spike benchmark is the first build task).
+- **Remaining baseline deferrals.** A handful of principle ranges are honestly deferred pending instrumented studies (wrist-release-flexion angle, heel-off timing, ball-to-palm gap in units, backspin *rate* from static pose) — see *Resolved gaps* in the baseline; none blocks v1 (each has a working proxy or presence-check).
 
 ## 10. Residual risks
 
@@ -102,7 +106,7 @@ Basketball is the MVP; the seam is **thin and deliberate**: generic **core types
 4. **Backspin** is assessed from hand/finger/wrist placement + ball touch points in the pose — never from simulated flight.
 5. The report surfaces **all** fixes, ranked; the **top fix is stable** under small pose perturbations (no rank jitter between near-identical poses).
 6. Fix guidance uses **external-focus phrasing** (target/ball/arc), not internal body-part commands.
-7. Re-grading an edit is **deterministic** and returns within an interactive budget in-browser.
+7. Re-grading an edit is **deterministic** and returns within an interactive budget in-browser: **re-grade + report ≤ 100 ms**, **drag interaction ≥ 30 fps**, **initial load ≤ 5 s** on a mid-range laptop. (Targets, not yet benchmarked — §9; a spike benchmark of the WASM humanoid scene is the first build task.)
 8. Any **transfer/efficacy claim** in product copy is gated on the RCT; until then, copy uses **scaffold framing**.
 9. The sport-specific logic lives behind **plugin interfaces**; the core types name no basketball-specific concept.
 
@@ -115,6 +119,9 @@ Basketball is the MVP; the seam is **thin and deliberate**: generic **core types
 | [0004](decisions/0004-scoring-model.md) | Baseline = shooting principles as **ranges**; style (in-range) vs conflict (out-of-range); phase-aware; all fixes ranked; **hybrid** hierarchy + persistence growth loop |
 | [0005](decisions/0005-positioning-and-transfer.md) | Off-court **scaffold**; awareness-as-learning-phase; external-focus cues; transfer = conditional-go gated on an **RCT** |
 | [0006](decisions/0006-sport-agnostic-seam.md) | **Thin seam**: generic core + per-sport plugins; basketball MVP only |
+| [0007](decisions/0007-app-stack-and-layout.md) | **Stack**: TS + React + three.js + Vite monorepo; `@mujoco/mujoco`; package seam; MJX pose pipeline; minimal persistence |
+| [0008](decisions/0008-score-semantics.md) | **Score**: 0–100 form grade (not probability); gate + weighted deductions; interactive finite-difference leverage, MJX offline oracle |
+| [0009](decisions/0009-scene-pose-lifecycle-gate.md) | **Scene/lifecycle**: virtual target; MJX pose library + fault injection; phase labeled + bounded editing; validity gate; report structure |
 
 ## 13. Evidence base
 

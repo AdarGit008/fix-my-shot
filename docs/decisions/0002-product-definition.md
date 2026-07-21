@@ -11,7 +11,7 @@ The initial concept was framed around a physics engine simulating a shot and, im
 
 ## Decision
 
-fix-my-shot grades the quality of a **static shooting-form pose** (any phase: wind-up, set, release, follow-through) against a research-derived baseline of shooting principles, on a physically-real **body + ball + floor** state. The score is *the probability that this form contributes to a high-quality, repeatable shot attempt* — a **form-quality grade, not a make probability**.
+fix-my-shot grades the quality of a **static shooting-form pose** (any phase — the canonical 5-phase taxonomy in [principles-baseline.md](../principles-baseline.md): stance / dip / loading / set-release / follow-through) against a research-derived baseline of shooting principles, on a physically-real **body + ball + floor** state. The score is *the probability that this form contributes to a high-quality, repeatable shot attempt* — a **form-quality grade, not a make probability**.
 
 Explicitly **out of scope:** ball trajectory, make/miss, entry geometry, aiming/targeting, air resistance, rim/backboard, and all environment variables beyond the fixed floor (treated as constants).
 

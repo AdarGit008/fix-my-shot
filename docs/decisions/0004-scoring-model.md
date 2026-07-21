@@ -17,7 +17,8 @@ The score is the report; mis-weighting it makes the product confidently wrong. R
 - **Fix hierarchy = HYBRID.** The engine computes per-pose leverage (differentiable sensitivity of the form score to each parameter); it is **stability-gated, grouped into coach-meaningful clusters (BEEF-style), and re-labeled in expert vocabulary.** Not raw gradients (unstable → teaches noise); not a fixed expert ranking (state-blind — can't say "for *this* pose, fix X first").
 - **Leverage robustness:** pose parameters are geometrically coupled, so single-fix attribution is made robust (grouped, conditional on coupled params, suppressed when a ranking flips under a small pose perturbation) and validated against empirical predictors.
 - Score is **form quality**, not make probability (ADR-0002).
-- **Instantiation:** the concrete baseline — the phase taxonomy, per-phase principle ranges, and the `written-in-stone` / `style-tolerant` / `excluded` lists — lives in [docs/principles-baseline.md](../principles-baseline.md) (derived + cross-verified, research batch 3). It is the scorer's single source of truth; open numeric gaps are tracked in issue #3.
+- **Instantiation:** the concrete baseline — the phase taxonomy, per-phase principle ranges, and the `written-in-stone` / `style-tolerant` / `excluded` lists — lives in [docs/principles-baseline.md](../principles-baseline.md) (derived + cross-verified, research batches 3–4). It is the scorer's single source of truth; the batch-3 numeric gaps (issue #3) are now **closed** — each pinned, proxied, or deferred with rationale.
+- **Aggregation:** how per-principle range-memberships combine into the single 0–100 form grade (gate + weighted deductions; written-in-stone caps, guideline graded, style never penalized) and how interactive leverage is computed (in-browser finite differences; MJX offline as validation oracle) are fixed in [ADR-0008](0008-score-semantics.md).
 
 ## Consequences
 
