@@ -1,10 +1,12 @@
 # fix-my-shot
 
-> **Status: product DEFINED, pre-build.** The spec of record, the decision log
-> (ADR-0002…0009), and the scorer's principle baseline are merged to `main`.
-> There is no application code **yet** — the next step is build kickoff, at which
-> point the repo's `type` flips from `docs` to the real stack in the first-code PR
-> (per [ADR-0001](docs/decisions/0001-adopt-baseline.md)).
+> **Status: build kickoff — first code has landed.** The spec of record, the
+> decision log (ADR-0002…0009), and the scorer's principle baseline are on `main`.
+> The TypeScript monorepo scaffold is up and the repo's `type` has flipped
+> `docs → node` (issue #5, per [ADR-0007](docs/decisions/0007-app-stack-and-layout.md)
+> superseding [ADR-0001](docs/decisions/0001-adopt-baseline.md)'s posture clause), so
+> the build/test readiness rules are now live. Feature work follows the **v0.1 —
+> local deploy** milestone (issues #6–#15).
 
 ## What this is
 
@@ -19,24 +21,43 @@ the ranked fixes — training **execution, not aim**; no ball flight, no make/mi
 - **[docs/decisions/](docs/decisions/)** — ADR-0002…0009 (product, engine, scoring, positioning, sport seam, stack/layout, score semantics, scene/lifecycle).
 - **[docs/research/](docs/research/)** — the cross-verified evidence base and the open-source landscape.
 
-The repo is still deliberately docs-first: a governed decision log, a records
-ledger, and a machine-checkable readiness standard — the artifacts that *should*
-exist before code.
+Around the code sits a governed decision log, a records ledger, and a
+machine-checkable readiness standard — the artifacts that should exist *with* the
+code, not just the code itself.
+
+### Layout
+
+```
+apps/web/            Vite + React shell (the app)
+packages/core/       sport-agnostic domain — names no sport concept (ADR-0006)
+packages/basketball/ the per-sport plugin: phases + principle data
+packages/scoring/    phase-aware range scorer + report model (ADR-0008)
+tools/posegen/       offline MJX pose pipeline (Python/JAX; not an npm workspace)
+```
 
 ## Getting started
 
-There is nothing to install or run yet. To work in this repo today:
+Requires **Node ≥ 22** (see [`.nvmrc`](.nvmrc)).
 
-1. **Orient.** See where things stand — decisions, open work, records:
+1. **Install** — one documented entrypoint sets up the workspaces:
+   ```bash
+   bin/setup          # npm ci on a clean checkout, else npm install
+   ```
+2. **Develop** — the standard workspace tasks:
+   ```bash
+   npm run dev        # Vite dev server (apps/web)
+   npm test           # Vitest across all packages
+   npm run typecheck  # tsc --noEmit, whole repo
+   npm run lint       # eslint (incl. the ADR-0006 core→plugin import boundary)
+   npm run build      # Vite production build
+   ```
+3. **Orient / check readiness** — derived state and the baseline score:
    ```bash
    node "$HOME/.claude/skills/baseline/baseline.mjs" orient --repo .
+   node "$HOME/.claude/skills/baseline/baseline.mjs" check  --repo .
    ```
-2. **Check readiness.** Score the repo against the baseline standard:
-   ```bash
-   node "$HOME/.claude/skills/baseline/check.mjs" --repo .
-   ```
-3. **Read the definitions.** Start with [`docs/SPEC.md`](docs/SPEC.md), then the
-   decisions from [`docs/decisions/0001-adopt-baseline.md`](docs/decisions/0001-adopt-baseline.md).
+4. **Read the definitions.** Start with [`docs/SPEC.md`](docs/SPEC.md), then the
+   decisions in [`docs/decisions/`](docs/decisions/).
 
 ## How this repo is governed
 

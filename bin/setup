@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# fix-my-shot — the single documented bootstrap entrypoint (BUILD-07).
+# Installs workspace dependencies for a clean checkout. Referenced by name in README.md.
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+if [ -f package-lock.json ]; then
+  npm ci
+else
+  npm install
+fi
+
+echo "✓ fix-my-shot dependencies installed. Next: 'npm test' · 'npm run dev'"

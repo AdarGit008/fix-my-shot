@@ -2,7 +2,7 @@
 
 Status: Accepted
 Supersedes: none
-Superseded-by: none
+Superseded-by: ADR-0007 (posture clause only — the `type: docs → node` flip; the workflow, license, and hook decisions stand)
 Date: 2026-07-20
 
 ## Context

@@ -13,6 +13,9 @@
 node_modules/
 dist/
 build/
+coverage/
+*.tsbuildinfo
+.vite/
 *.pyc
 __pycache__/
 .venv/

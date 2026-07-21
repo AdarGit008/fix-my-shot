@@ -1,0 +1,18 @@
+{
+  "name": "@fix-my-shot/scoring",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Measurement layer, phase-aware range scorer, and report model (ADR-0008). Depends on @fix-my-shot/core only; sport data arrives as a FormObjective.",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fix-my-shot/core": "*"
+  }
+}

@@ -1,7 +1,7 @@
 # ADR-0007 — Application stack & repository layout
 
 Status: Accepted
-Supersedes: none
+Supersedes: ADR-0001 (posture clause — realizes its `type: docs → node` flip)
 Superseded-by: none
 Date: 2026-07-21
 
@@ -31,7 +31,9 @@ tools/posegen/       Python/JAX MJX offline: pose-library generation (v1) and,
 
 **v1 persistence.** `localStorage`-minimal: session history, per-principle trend, and top-fix continuity (the app remembers the current top fix and shows whether it improved). Fuller progression design stays an open question ([SPEC.md](../SPEC.md) §9).
 
-**Type flip.** This ADR does **not** flip `baseline.repo.json`. Per ADR-0001, the flip `type: docs → node` happens in the **same PR that lands the first code** (the first build issue), which also sets ADR-0001's `Superseded-by:` to this ADR for its posture clause. Until then the build/test rules stay correctly dormant.
+**Type flip.** This ADR does **not** flip `baseline.repo.json` on its own. Per ADR-0001, the flip `type: docs → node` happens in the **same PR that lands the first code** (the first build issue), which also sets ADR-0001's `Superseded-by:` to this ADR for its posture clause. Until then the build/test rules stay correctly dormant.
+
+> *Realized 2026-07-21 (issue #5).* That PR is here: the flip landed alongside the monorepo scaffold (`apps/web`, `packages/{core,basketball,scoring}`, `tools/posegen`), so the build/test baseline rules are now live, and the DESC-03 descriptor-change judgment rides this same PR.
 
 ## Consequences
 
