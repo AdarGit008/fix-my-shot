@@ -88,7 +88,7 @@ Basketball is the MVP; the seam is **thin and deliberate**: generic **core types
 **Still open:**
 - **Pose realizability (strength).** The MVP validity gate covers joint limits + quasi-static balance + contact-penetration ([ADR-0009](decisions/0009-scene-pose-lifecycle-gate.md)); stricter joint-torque / strength feasibility remains the single least-studied link and is deferred.
 - **Persistence mechanism design (full).** v1 ships `localStorage`-minimal (history, per-principle trend, top-fix continuity); the full cross-session progression/retention loop that walks users up the hierarchy is still to be designed.
-- **In-browser performance budget.** Numeric targets are set in §11.7, but they are **not yet benchmarked** for a humanoid+ball+floor WASM scene (inferred feasible; a spike benchmark is the first build task).
+- **In-browser performance budget.** Numeric targets (§11.7) are now **benchmarked and met**. The issue #6 spike loaded the humanoid+ball+floor scene (nq 35, 21 geoms, 21 actuators) in the official `@mujoco/mujoco` WASM build and measured re-grade+report **p95 0.2 ms**, drag **≥ 60 fps** (software-GL floor; ~2500 fps CPU capacity), and initial load **~0.2 s** — every budget cleared by 25×–500× (**GO**; [spike record](spikes/0006-engine-benchmark.md)). Residual: numbers are from the dev machine, not a certified mid-range reference — but the margins swamp any plausible machine gap.
 - **Remaining baseline deferrals.** A handful of principle ranges are honestly deferred pending instrumented studies (wrist-release-flexion angle, heel-off timing, ball-to-palm gap in units, backspin *rate* from static pose) — see *Resolved gaps* in the baseline; none blocks v1 (each has a working proxy or presence-check).
 
 ## 10. Residual risks
@@ -106,7 +106,7 @@ Basketball is the MVP; the seam is **thin and deliberate**: generic **core types
 4. **Backspin** is assessed from hand/finger/wrist placement + ball touch points in the pose — never from simulated flight.
 5. The report surfaces **all** fixes, ranked; the **top fix is stable** under small pose perturbations (no rank jitter between near-identical poses).
 6. Fix guidance uses **external-focus phrasing** (target/ball/arc), not internal body-part commands.
-7. Re-grading an edit is **deterministic** and returns within an interactive budget in-browser: **re-grade + report ≤ 100 ms**, **drag interaction ≥ 30 fps**, **initial load ≤ 5 s** on a mid-range laptop. (Targets, not yet benchmarked — §9; a spike benchmark of the WASM humanoid scene is the first build task.)
+7. Re-grading an edit is **deterministic** and returns within an interactive budget in-browser: **re-grade + report ≤ 100 ms**, **drag interaction ≥ 30 fps**, **initial load ≤ 5 s** on a mid-range laptop. (Benchmarked by the issue #6 spike — re-grade+report **p95 0.2 ms**, drag **≥ 60 fps**, load **~0.2 s** on the dev machine, all far inside budget: **GO** — [spike record](spikes/0006-engine-benchmark.md). Confirmation on a defined mid-range reference is the one remaining check; determinism of the full scorer is proven with the scorer, issues #10–#14.)
 8. Any **transfer/efficacy claim** in product copy is gated on the RCT; until then, copy uses **scaffold framing**.
 9. The sport-specific logic lives behind **plugin interfaces**; the core types name no basketball-specific concept.
 

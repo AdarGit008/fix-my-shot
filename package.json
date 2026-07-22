@@ -18,6 +18,7 @@
     "build": "npm run build --workspace @fix-my-shot/web",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "spike:measure": "npm run build --workspace @fix-my-shot/web && node tools/spike-measure.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
