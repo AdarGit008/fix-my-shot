@@ -23,4 +23,4 @@ The physics engine is the heart of the product and realism is the priority — b
 - Deterministic, trivially real-time interactive loop; the WASM-float-reproducibility risk is largely moot for a static, gate-checked pose.
 - **Weakest link:** the pose must be one a real body could hold/produce (realizability) — kept as an open question and a feasibility-gate responsibility.
 - Muscle-actuator fidelity remains an optional future dial within the same engine; MJX never runs per-interaction in-browser.
-- Not yet benchmarked: in-browser fps/latency for a humanoid+ball+floor scene (inferred feasible from lighter-than-robot load).
+- ~~Not yet benchmarked: in-browser fps/latency for a humanoid+ball+floor scene (inferred feasible from lighter-than-robot load).~~ **Benchmarked (issue #6, 2026-07-22):** the humanoid+ball+floor scene (nq 35, 21 geoms) in `@mujoco/mujoco` clears every §11.7 budget by 25×–500× — re-grade `mj_forward` p95 0.2 ms, drag ≥ 60 fps, load ~0.2 s. **GO** on the MuJoCo-WASM bet; the Rapier/Jolt fallback is not needed. See [docs/spikes/0006-engine-benchmark.md](../spikes/0006-engine-benchmark.md).

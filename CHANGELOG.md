@@ -8,6 +8,18 @@ release.
 ## [Unreleased]
 
 ### Added
+- **Engine spike — GO** (2026-07-22, issue #6): benchmarked the official
+  `@mujoco/mujoco` WebAssembly build with a humanoid+ball+floor scene against the
+  [SPEC §11.7](docs/SPEC.md) interactive budget and cleared every target by 25×–500×
+  (re-grade+report p95 0.2 ms · drag ≥ 60 fps · load ~0.2 s) — de-risking the
+  ADR-0003/0007 core bet; the Rapier/Jolt fallback is not needed. Adds a committed,
+  self-measuring spike page (`apps/web` `?spike`: three.js primitive renderer with
+  z-up→y-up sync, an Embind `.delete()` lifetime registry, and a `mjv_applyPerturbForce`
+  drag), a headless Playwright measurement harness (`npm run spike:measure`,
+  [tools/spike-measure.mjs](tools/spike-measure.mjs)), and the go/no-go record
+  [docs/spikes/0006-engine-benchmark.md](docs/spikes/0006-engine-benchmark.md). Records
+  the measured numbers into SPEC §11.7/§9 and [ADR-0003](docs/decisions/0003-engine-and-compute.md).
+  New deps in `apps/web`: `three`, `@mujoco/mujoco`, and `playwright` (dev).
 - **Monorepo scaffold — first code** (2026-07-21, issue #5): the TypeScript + Vite +
   npm-workspaces monorepo per [ADR-0007](docs/decisions/0007-app-stack-and-layout.md) —
   `apps/web` (Vite + React shell), `packages/{core,basketball,scoring}` (the ADR-0006

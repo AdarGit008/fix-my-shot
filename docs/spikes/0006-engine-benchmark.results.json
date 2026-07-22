@@ -1,0 +1,48 @@
+{
+  "scene": {
+    "nq": 35,
+    "nv": 33,
+    "nbody": 18,
+    "ngeom": 21,
+    "nu": 21
+  },
+  "load": {
+    "moduleInitMs": 99.30000001192093,
+    "firstFrameMs": 75.60000002384186,
+    "totalFromNavMs": 220.5
+  },
+  "regrade": {
+    "iters": 2000,
+    "avgMs": 0.09934999999403954,
+    "p50Ms": 0.10000002384185791,
+    "p95Ms": 0.19999998807907104,
+    "maxMs": 3.199999988079071
+  },
+  "drag": {
+    "durationMs": 3002,
+    "frames": 181,
+    "observedFps": 60.2911295433717,
+    "medianFrameMs": 0.3999999761581421,
+    "p95FrameMs": 0.7000000476837158,
+    "capacityFps": 2500.000149011621
+  },
+  "verdict": {
+    "load": {
+      "budget": "initial load ≤ 5000 ms",
+      "measured": "221 ms",
+      "pass": true
+    },
+    "regrade": {
+      "budget": "re-grade + report ≤ 100 ms",
+      "measured": "avg 0.099 ms · p95 0.200 ms",
+      "pass": true
+    },
+    "drag": {
+      "budget": "drag interaction ≥ 30 fps",
+      "measured": "2500 fps capacity (median frame 0.40 ms · observed 60 fps)",
+      "pass": true
+    },
+    "overall": "GO"
+  },
+  "note": "Numbers are measured on the machine running the benchmark, not a defined \"mid-range laptop\" reference. A headless run additionally renders via software GL (SwiftShader), so its fps is a conservative floor for real hardware."
+}
