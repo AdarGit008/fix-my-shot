@@ -1,0 +1,3557 @@
+{
+  "version": 1,
+  "generator": "tools/posegen/generate.py",
+  "model": "humanoid+ball (apps/web/src/spike/scene.xml)",
+  "seed": 20260723,
+  "jointOrder": [
+    "abdomen_z",
+    "abdomen_y",
+    "abdomen_x",
+    "hip_x_right",
+    "hip_z_right",
+    "hip_y_right",
+    "knee_right",
+    "ankle_y_right",
+    "ankle_x_right",
+    "hip_x_left",
+    "hip_z_left",
+    "hip_y_left",
+    "knee_left",
+    "ankle_y_left",
+    "ankle_x_left",
+    "shoulder1_right",
+    "shoulder2_right",
+    "elbow_right",
+    "shoulder1_left",
+    "shoulder2_left",
+    "elbow_left"
+  ],
+  "phases": [
+    "stance",
+    "dip",
+    "loading",
+    "set-release",
+    "follow-through"
+  ],
+  "poseCount": 33,
+  "poses": [
+    {
+      "id": "stance-clean",
+      "phase": "stance",
+      "kind": "clean",
+      "seed": 20260723,
+      "faults": [],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -14.0,
+        "knee_right": -18.0,
+        "ankle_y_right": 0.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -14.0,
+        "knee_left": -18.0,
+        "ankle_y_left": 0.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -70.0,
+        "shoulder2_right": -40.0,
+        "elbow_right": -30.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.28765
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.11762,
+          -0.76249,
+          1.60067
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.287654,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05236,
+        0.0,
+        0.0,
+        0.0,
+        -0.244346,
+        -0.314159,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.244346,
+        -0.314159,
+        0.0,
+        0.0,
+        -1.22173,
+        -0.698132,
+        -0.523599,
+        0.0,
+        0.0,
+        0.0,
+        0.117624,
+        -0.762486,
+        1.600675,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "stance-hunched-torso-00",
+      "phase": "stance",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "abdomen_y",
+          "principle": "erect-torso",
+          "deltaDeg": -23.028
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -20.0283,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 15.0,
+        "knee_right": -18.0,
+        "ankle_y_right": 1.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 15.0,
+        "knee_left": -18.0,
+        "ankle_y_left": 1.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -70.0,
+        "shoulder2_right": -40.0,
+        "elbow_right": -30.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.28622
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.10384,
+          -0.76386,
+          1.59924
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.286223,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.349559,
+        0.0,
+        0.0,
+        0.0,
+        0.261799,
+        -0.314159,
+        0.017453,
+        0.0,
+        0.0,
+        0.0,
+        0.261799,
+        -0.314159,
+        0.017453,
+        0.0,
+        -1.22173,
+        -0.698132,
+        -0.523599,
+        0.0,
+        0.0,
+        0.0,
+        0.103842,
+        -0.763861,
+        1.599244,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "stance-hunched-torso-01",
+      "phase": "stance",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "abdomen_y",
+          "principle": "erect-torso",
+          "deltaDeg": -21.041
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -18.0414,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 12.0,
+        "knee_right": -18.0,
+        "ankle_y_right": 4.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 12.0,
+        "knee_left": -18.0,
+        "ankle_y_left": 4.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -70.0,
+        "shoulder2_right": -40.0,
+        "elbow_right": -30.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.29386
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.10465,
+          -0.76381,
+          1.60688
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.293862,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.314881,
+        0.0,
+        0.0,
+        0.0,
+        0.20944,
+        -0.314159,
+        0.069813,
+        0.0,
+        0.0,
+        0.0,
+        0.20944,
+        -0.314159,
+        0.069813,
+        0.0,
+        -1.22173,
+        -0.698132,
+        -0.523599,
+        0.0,
+        0.0,
+        0.0,
+        0.104646,
+        -0.763811,
+        1.606882,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "stance-leaning-back-00",
+      "phase": "stance",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "abdomen_y",
+          "principle": "trunk-inclination",
+          "deltaDeg": 21.341
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 24.3414,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -36.0,
+        "knee_right": -18.0,
+        "ankle_y_right": -11.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -36.0,
+        "knee_left": -18.0,
+        "ankle_y_left": -11.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -70.0,
+        "shoulder2_right": -40.0,
+        "elbow_right": -30.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.25256
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.13323,
+          -0.75961,
+          1.56558
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.252561,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.424837,
+        0.0,
+        0.0,
+        0.0,
+        -0.628319,
+        -0.314159,
+        -0.191986,
+        0.0,
+        0.0,
+        0.0,
+        -0.628319,
+        -0.314159,
+        -0.191986,
+        0.0,
+        -1.22173,
+        -0.698132,
+        -0.523599,
+        0.0,
+        0.0,
+        0.0,
+        0.133231,
+        -0.759614,
+        1.565581,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "stance-leaning-back-01",
+      "phase": "stance",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "abdomen_y",
+          "principle": "trunk-inclination",
+          "deltaDeg": 18.336
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 21.3358,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -33.0,
+        "knee_right": -18.0,
+        "ankle_y_right": -8.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -33.0,
+        "knee_left": -18.0,
+        "ankle_y_left": -8.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -70.0,
+        "shoulder2_right": -40.0,
+        "elbow_right": -30.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.25463
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.13115,
+          -0.76008,
+          1.56765
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.254632,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.37238,
+        0.0,
+        0.0,
+        0.0,
+        -0.575959,
+        -0.314159,
+        -0.139626,
+        0.0,
+        0.0,
+        0.0,
+        -0.575959,
+        -0.314159,
+        -0.139626,
+        0.0,
+        -1.22173,
+        -0.698132,
+        -0.523599,
+        0.0,
+        0.0,
+        0.0,
+        0.131147,
+        -0.76008,
+        1.567652,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "stance-wide-stance-00",
+      "phase": "stance",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "hip_x_right",
+          "principle": "stance-width",
+          "deltaDeg": -23.26
+        },
+        {
+          "joint": "hip_x_left",
+          "principle": "stance-width",
+          "deltaDeg": -23.26
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 6.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": -23.26,
+        "hip_z_right": 0.0,
+        "hip_y_right": -15.0,
+        "knee_right": -18.0,
+        "ankle_y_right": -2.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": -23.26,
+        "hip_z_left": 0.0,
+        "hip_y_left": -15.0,
+        "knee_left": -18.0,
+        "ankle_y_left": -2.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -70.0,
+        "shoulder2_right": -40.0,
+        "elbow_right": -30.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.23998
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.12128,
+          -0.76194,
+          1.553
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.239984,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.10472,
+        0.0,
+        -0.405963,
+        0.0,
+        -0.261799,
+        -0.314159,
+        -0.034907,
+        0.0,
+        -0.405963,
+        0.0,
+        -0.261799,
+        -0.314159,
+        -0.034907,
+        0.0,
+        -1.22173,
+        -0.698132,
+        -0.523599,
+        0.0,
+        0.0,
+        0.0,
+        0.121282,
+        -0.76194,
+        1.553005,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "stance-wide-stance-01",
+      "phase": "stance",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "hip_x_right",
+          "principle": "stance-width",
+          "deltaDeg": -16.135
+        },
+        {
+          "joint": "hip_x_left",
+          "principle": "stance-width",
+          "deltaDeg": -16.135
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 6.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": -16.1349,
+        "hip_z_right": 0.0,
+        "hip_y_right": -15.0,
+        "knee_right": -18.0,
+        "ankle_y_right": -5.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": -16.1349,
+        "hip_z_left": 0.0,
+        "hip_y_left": -15.0,
+        "knee_left": -18.0,
+        "ankle_y_left": -5.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -70.0,
+        "shoulder2_right": -40.0,
+        "elbow_right": -30.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.26118
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.1214,
+          -0.76192,
+          1.5742
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.261176,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.10472,
+        0.0,
+        -0.281607,
+        0.0,
+        -0.261799,
+        -0.314159,
+        -0.087266,
+        0.0,
+        -0.281607,
+        0.0,
+        -0.261799,
+        -0.314159,
+        -0.087266,
+        0.0,
+        -1.22173,
+        -0.698132,
+        -0.523599,
+        0.0,
+        0.0,
+        0.0,
+        0.1214,
+        -0.761922,
+        1.574197,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "dip-clean",
+      "phase": "dip",
+      "kind": "clean",
+      "seed": 20260723,
+      "faults": [],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 12.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -45.0,
+        "knee_right": -55.0,
+        "ankle_y_right": 0.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -45.0,
+        "knee_left": -55.0,
+        "ankle_y_left": 0.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -60.0,
+        "shoulder2_right": -50.0,
+        "elbow_right": 20.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.23638
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.1824,
+          -0.54634,
+          1.37733
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.236385,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.20944,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.959931,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.959931,
+        0.0,
+        0.0,
+        -1.047198,
+        -0.872665,
+        0.349066,
+        0.0,
+        0.0,
+        0.0,
+        0.182395,
+        -0.546341,
+        1.37733,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "dip-unloaded-straight-knee-00",
+      "phase": "dip",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "knee_right",
+          "principle": "load-presence",
+          "deltaDeg": 35.69
+        },
+        {
+          "joint": "knee_left",
+          "principle": "load-presence",
+          "deltaDeg": 35.69
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 30.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -45.0,
+        "knee_right": -19.3099,
+        "ankle_y_right": 1.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -45.0,
+        "knee_left": -19.3099,
+        "ankle_y_left": 1.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -60.0,
+        "shoulder2_right": -50.0,
+        "elbow_right": 20.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.24356
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.20713,
+          -0.5367,
+          1.3845
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.243558,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.523599,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.337021,
+        0.017453,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.337021,
+        0.017453,
+        0.0,
+        -1.047198,
+        -0.872665,
+        0.349066,
+        0.0,
+        0.0,
+        0.0,
+        0.207131,
+        -0.536699,
+        1.384503,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "dip-unloaded-straight-knee-01",
+      "phase": "dip",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "knee_right",
+          "principle": "load-presence",
+          "deltaDeg": 37.655
+        },
+        {
+          "joint": "knee_left",
+          "principle": "load-presence",
+          "deltaDeg": 37.655
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 30.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -45.0,
+        "knee_right": -17.3453,
+        "ankle_y_right": 10.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -45.0,
+        "knee_left": -17.3453,
+        "ankle_y_left": 10.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -60.0,
+        "shoulder2_right": -50.0,
+        "elbow_right": 20.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.25968
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.20683,
+          -0.53684,
+          1.40063
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.259685,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.523599,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.302732,
+        0.174533,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.302732,
+        0.174533,
+        0.0,
+        -1.047198,
+        -0.872665,
+        0.349066,
+        0.0,
+        0.0,
+        0.0,
+        0.206832,
+        -0.536842,
+        1.40063,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "dip-asymmetric-load-00",
+      "phase": "dip",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "knee_right",
+          "principle": "load-presence",
+          "deltaDeg": 31.305
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 21.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -45.0,
+        "knee_right": -23.6946,
+        "ankle_y_right": -8.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -45.0,
+        "knee_left": -55.0,
+        "ankle_y_left": -8.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -60.0,
+        "shoulder2_right": -50.0,
+        "elbow_right": 20.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.23948
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.19566,
+          -0.5417,
+          1.38043
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.239482,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.366519,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.413549,
+        -0.139626,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.959931,
+        -0.139626,
+        0.0,
+        -1.047198,
+        -0.872665,
+        0.349066,
+        0.0,
+        0.0,
+        0.0,
+        0.195659,
+        -0.541695,
+        1.380427,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "dip-asymmetric-load-01",
+      "phase": "dip",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "knee_right",
+          "principle": "load-presence",
+          "deltaDeg": 35.706
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 21.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -45.0,
+        "knee_right": -19.2937,
+        "ankle_y_right": 4.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -45.0,
+        "knee_left": -55.0,
+        "ankle_y_left": 4.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -60.0,
+        "shoulder2_right": -50.0,
+        "elbow_right": 20.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.24891
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.19535,
+          -0.54182,
+          1.38986
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.248912,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.366519,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.336738,
+        0.069813,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.959931,
+        0.069813,
+        0.0,
+        -1.047198,
+        -0.872665,
+        0.349066,
+        0.0,
+        0.0,
+        0.0,
+        0.195347,
+        -0.541818,
+        1.389857,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "dip-shallow-knee-00",
+      "phase": "dip",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "knee_right",
+          "principle": "knee-flexion",
+          "deltaDeg": 21.956
+        },
+        {
+          "joint": "knee_left",
+          "principle": "knee-flexion",
+          "deltaDeg": 21.956
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 24.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -45.0,
+        "knee_right": -33.0438,
+        "ankle_y_right": -8.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -45.0,
+        "knee_left": -33.0438,
+        "ankle_y_left": -8.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -60.0,
+        "shoulder2_right": -50.0,
+        "elbow_right": 20.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.23483
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.19975,
+          -0.54002,
+          1.37577
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.234828,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.418879,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.576724,
+        -0.139626,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.576724,
+        -0.139626,
+        0.0,
+        -1.047198,
+        -0.872665,
+        0.349066,
+        0.0,
+        0.0,
+        0.0,
+        0.199752,
+        -0.540021,
+        1.375772,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "dip-shallow-knee-01",
+      "phase": "dip",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "knee_right",
+          "principle": "knee-flexion",
+          "deltaDeg": 18.788
+        },
+        {
+          "joint": "knee_left",
+          "principle": "knee-flexion",
+          "deltaDeg": 18.788
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 21.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -45.0,
+        "knee_right": -36.2119,
+        "ankle_y_right": 7.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -45.0,
+        "knee_left": -36.2119,
+        "ankle_y_left": 7.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -60.0,
+        "shoulder2_right": -50.0,
+        "elbow_right": 20.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.26436
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.19532,
+          -0.54183,
+          1.40531
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.26436,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.366519,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.632017,
+        0.122173,
+        0.0,
+        0.0,
+        0.0,
+        -0.785398,
+        -0.632017,
+        0.122173,
+        0.0,
+        -1.047198,
+        -0.872665,
+        0.349066,
+        0.0,
+        0.0,
+        0.0,
+        0.195325,
+        -0.541827,
+        1.405305,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "loading-clean",
+      "phase": "loading",
+      "kind": "clean",
+      "seed": 20260723,
+      "faults": [],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -22.0,
+        "knee_right": -30.0,
+        "ankle_y_right": 0.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -22.0,
+        "knee_left": -30.0,
+        "ankle_y_left": 0.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -75.0,
+        "shoulder2_right": 30.0,
+        "elbow_right": -80.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.27911
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.54188,
+          -0.47642,
+          1.81095
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.279107,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05236,
+        0.0,
+        0.0,
+        0.0,
+        -0.383972,
+        -0.523599,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.383972,
+        -0.523599,
+        0.0,
+        0.0,
+        -1.308997,
+        0.523599,
+        -1.396263,
+        0.0,
+        0.0,
+        0.0,
+        0.541883,
+        -0.476421,
+        1.810953,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "loading-elbow-flared-out-00",
+      "phase": "loading",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "shoulder2_right",
+          "principle": "elbow-under-loading",
+          "deltaDeg": -49.737
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 6.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -24.0,
+        "knee_right": -30.0,
+        "ankle_y_right": 7.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -24.0,
+        "knee_left": -30.0,
+        "ankle_y_left": 7.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -75.0,
+        "shoulder2_right": -19.7369,
+        "elbow_right": -80.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.29493
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.05515,
+          -0.87135,
+          1.72401
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.294932,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.10472,
+        0.0,
+        0.0,
+        0.0,
+        -0.418879,
+        -0.523599,
+        0.122173,
+        0.0,
+        0.0,
+        0.0,
+        -0.418879,
+        -0.523599,
+        0.122173,
+        0.0,
+        -1.308997,
+        -0.344474,
+        -1.396263,
+        0.0,
+        0.0,
+        0.0,
+        0.055152,
+        -0.871346,
+        1.724012,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "loading-elbow-flared-out-01",
+      "phase": "loading",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "shoulder2_right",
+          "principle": "elbow-under-loading",
+          "deltaDeg": -61.556
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 6.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -24.0,
+        "knee_right": -30.0,
+        "ankle_y_right": 10.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -24.0,
+        "knee_left": -30.0,
+        "ankle_y_left": 10.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -75.0,
+        "shoulder2_right": -31.5556,
+        "elbow_right": -80.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.30033
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          -0.07353,
+          -0.90092,
+          1.66709
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.300331,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.10472,
+        0.0,
+        0.0,
+        0.0,
+        -0.418879,
+        -0.523599,
+        0.174533,
+        0.0,
+        0.0,
+        0.0,
+        -0.418879,
+        -0.523599,
+        0.174533,
+        0.0,
+        -1.308997,
+        -0.550749,
+        -1.396263,
+        0.0,
+        0.0,
+        0.0,
+        -0.073528,
+        -0.900916,
+        1.667094,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "loading-legs-not-extending-00",
+      "phase": "loading",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "knee_right",
+          "principle": "sequential-leg-extension",
+          "deltaDeg": -17.395
+        },
+        {
+          "joint": "knee_left",
+          "principle": "sequential-leg-extension",
+          "deltaDeg": -17.395
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -24.0,
+        "knee_right": -47.3946,
+        "ankle_y_right": 4.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -24.0,
+        "knee_left": -47.3946,
+        "ankle_y_left": 4.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -75.0,
+        "shoulder2_right": 30.0,
+        "elbow_right": -80.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.26921
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.53795,
+          -0.48049,
+          1.80105
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.269207,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        0.0,
+        0.0,
+        0.0,
+        -0.418879,
+        -0.827191,
+        0.069813,
+        0.0,
+        0.0,
+        0.0,
+        -0.418879,
+        -0.827191,
+        0.069813,
+        0.0,
+        -1.308997,
+        0.523599,
+        -1.396263,
+        0.0,
+        0.0,
+        0.0,
+        0.537948,
+        -0.480489,
+        1.801052,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "loading-legs-not-extending-01",
+      "phase": "loading",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "knee_right",
+          "principle": "sequential-leg-extension",
+          "deltaDeg": -19.979
+        },
+        {
+          "joint": "knee_left",
+          "principle": "sequential-leg-extension",
+          "deltaDeg": -19.979
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -6.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -21.0,
+        "knee_right": -49.979,
+        "ankle_y_right": -5.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -21.0,
+        "knee_left": -49.979,
+        "ankle_y_left": -5.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -75.0,
+        "shoulder2_right": 30.0,
+        "elbow_right": -80.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.25122
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.53669,
+          -0.48174,
+          1.78307
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.251224,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.10472,
+        0.0,
+        0.0,
+        0.0,
+        -0.366519,
+        -0.872298,
+        -0.087266,
+        0.0,
+        0.0,
+        0.0,
+        -0.366519,
+        -0.872298,
+        -0.087266,
+        0.0,
+        -1.308997,
+        0.523599,
+        -1.396263,
+        0.0,
+        0.0,
+        0.0,
+        0.536685,
+        -0.481741,
+        1.78307,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "loading-low-arm-drive-00",
+      "phase": "loading",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "shoulder1_right",
+          "principle": "shoulder-elevation",
+          "deltaDeg": 39.537
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -21.0,
+        "knee_right": -30.0,
+        "ankle_y_right": 1.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -21.0,
+        "knee_left": -30.0,
+        "ankle_y_left": 1.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -35.4631,
+        "shoulder2_right": 30.0,
+        "elbow_right": -80.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.28426
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.69362,
+          -0.47969,
+          1.56184
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.284263,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05236,
+        0.0,
+        0.0,
+        0.0,
+        -0.366519,
+        -0.523599,
+        0.017453,
+        0.0,
+        0.0,
+        0.0,
+        -0.366519,
+        -0.523599,
+        0.017453,
+        0.0,
+        -0.618948,
+        0.523599,
+        -1.396263,
+        0.0,
+        0.0,
+        0.0,
+        0.693619,
+        -0.479693,
+        1.561837,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "loading-low-arm-drive-01",
+      "phase": "loading",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "shoulder1_right",
+          "principle": "shoulder-elevation",
+          "deltaDeg": 45.179
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -21.0,
+        "knee_right": -30.0,
+        "ankle_y_right": 1.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -21.0,
+        "knee_left": -30.0,
+        "ankle_y_left": 1.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -29.8208,
+        "shoulder2_right": 30.0,
+        "elbow_right": -80.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.28426
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.70952,
+          -0.4638,
+          1.5236
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.284263,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05236,
+        0.0,
+        0.0,
+        0.0,
+        -0.366519,
+        -0.523599,
+        0.017453,
+        0.0,
+        0.0,
+        0.0,
+        -0.366519,
+        -0.523599,
+        0.017453,
+        0.0,
+        -0.520471,
+        0.523599,
+        -1.396263,
+        0.0,
+        0.0,
+        0.0,
+        0.709518,
+        -0.463798,
+        1.523597,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "set-release-clean",
+      "phase": "set-release",
+      "kind": "clean",
+      "seed": 20260723,
+      "faults": [],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 0.0,
+        "knee_right": -8.0,
+        "ankle_y_right": 0.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 0.0,
+        "knee_left": -8.0,
+        "ankle_y_left": 0.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -85.0,
+        "shoulder2_right": 60.0,
+        "elbow_right": -90.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.29075
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.6572,
+          -0.1341,
+          1.82534
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.290751,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.139626,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.139626,
+        0.0,
+        0.0,
+        -1.48353,
+        1.047198,
+        -1.570796,
+        0.0,
+        0.0,
+        0.0,
+        0.657202,
+        -0.134102,
+        1.825341,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "set-release-elbow-not-extended-00",
+      "phase": "set-release",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "elbow_right",
+          "principle": "near-full-elbow-extension",
+          "deltaDeg": 46.592
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 0.0,
+        "knee_right": -8.0,
+        "ankle_y_right": -8.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 0.0,
+        "knee_left": -8.0,
+        "ankle_y_left": -8.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -85.0,
+        "shoulder2_right": 60.0,
+        "elbow_right": -43.4079,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.28241
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.60294,
+          0.09004,
+          1.63744
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.282407,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.139626,
+        -0.139626,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.139626,
+        -0.139626,
+        0.0,
+        -1.48353,
+        1.047198,
+        -0.757611,
+        0.0,
+        0.0,
+        0.0,
+        0.602944,
+        0.090039,
+        1.637439,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "set-release-elbow-not-extended-01",
+      "phase": "set-release",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "elbow_right",
+          "principle": "near-full-elbow-extension",
+          "deltaDeg": 59.91
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 0.0,
+        "knee_right": -8.0,
+        "ankle_y_right": -5.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 0.0,
+        "knee_left": -8.0,
+        "ankle_y_left": -5.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -85.0,
+        "shoulder2_right": 60.0,
+        "elbow_right": -30.0899,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.27885
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.55791,
+          0.12271,
+          1.57911
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.278853,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.139626,
+        -0.087266,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.139626,
+        -0.087266,
+        0.0,
+        -1.48353,
+        1.047198,
+        -0.525168,
+        0.0,
+        0.0,
+        0.0,
+        0.557911,
+        0.122713,
+        1.579113,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "set-release-trunk-lean-at-release-00",
+      "phase": "set-release",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "abdomen_y",
+          "principle": "trunk-at-release",
+          "deltaDeg": -20.767
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -23.7671,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 18.0,
+        "knee_right": -8.0,
+        "ankle_y_right": 43.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 18.0,
+        "knee_left": -8.0,
+        "ankle_y_left": 43.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -85.0,
+        "shoulder2_right": 60.0,
+        "elbow_right": -90.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.33166
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.65592,
+          -0.13952,
+          1.86625
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.331662,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.414815,
+        0.0,
+        0.0,
+        0.0,
+        0.314159,
+        -0.139626,
+        0.750492,
+        0.0,
+        0.0,
+        0.0,
+        0.314159,
+        -0.139626,
+        0.750492,
+        0.0,
+        -1.48353,
+        1.047198,
+        -1.570796,
+        0.0,
+        0.0,
+        0.0,
+        0.655916,
+        -0.139524,
+        1.866253,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "set-release-knee-bent-at-release-00",
+      "phase": "set-release",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "knee_right",
+          "principle": "base-extended",
+          "deltaDeg": -21.444
+        },
+        {
+          "joint": "knee_left",
+          "principle": "base-extended",
+          "deltaDeg": -21.444
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -15.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 0.0,
+        "knee_right": -29.4444,
+        "ankle_y_right": 7.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 0.0,
+        "knee_left": -29.4444,
+        "ankle_y_left": 7.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -85.0,
+        "shoulder2_right": 60.0,
+        "elbow_right": -90.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.29407
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.65621,
+          -0.13835,
+          1.82866
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.294066,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.261799,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.513902,
+        0.122173,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.513902,
+        0.122173,
+        0.0,
+        -1.48353,
+        1.047198,
+        -1.570796,
+        0.0,
+        0.0,
+        0.0,
+        0.656211,
+        -0.138347,
+        1.828656,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "set-release-knee-bent-at-release-01",
+      "phase": "set-release",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "knee_right",
+          "principle": "base-extended",
+          "deltaDeg": -25.691
+        },
+        {
+          "joint": "knee_left",
+          "principle": "base-extended",
+          "deltaDeg": -25.691
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -15.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -3.0,
+        "knee_right": -33.6907,
+        "ankle_y_right": 10.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -3.0,
+        "knee_left": -33.6907,
+        "ankle_y_left": 10.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -85.0,
+        "shoulder2_right": 60.0,
+        "elbow_right": -90.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.29369
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.6561,
+          -0.13879,
+          1.82828
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.293688,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.261799,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        -0.588014,
+        0.174533,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        -0.588014,
+        0.174533,
+        0.0,
+        -1.48353,
+        1.047198,
+        -1.570796,
+        0.0,
+        0.0,
+        0.0,
+        0.656101,
+        -0.138788,
+        1.828278,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "follow-through-clean",
+      "phase": "follow-through",
+      "kind": "clean",
+      "seed": 20260723,
+      "faults": [],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 0.0,
+        "knee_right": -4.0,
+        "ankle_y_right": 0.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 0.0,
+        "knee_left": -4.0,
+        "ankle_y_left": 0.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -85.0,
+        "shoulder2_right": 60.0,
+        "elbow_right": -40.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.28249
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.59235,
+          0.10017,
+          1.6433
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.28249,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.069813,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.069813,
+        0.0,
+        0.0,
+        -1.48353,
+        1.047198,
+        -0.698132,
+        0.0,
+        0.0,
+        0.0,
+        0.592352,
+        0.100174,
+        1.643299,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "follow-through-arm-collapsed-early-00",
+      "phase": "follow-through",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "elbow_right",
+          "principle": "terminal-wrist-flexion",
+          "deltaDeg": 55.774
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 0.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -3.0,
+        "knee_right": -4.0,
+        "ankle_y_right": 10.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -3.0,
+        "knee_left": -4.0,
+        "ankle_y_left": 10.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -85.0,
+        "shoulder2_right": 60.0,
+        "elbow_right": 15.7739,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.30567
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.45235,
+          0.10656,
+          1.48315
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.305672,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        -0.069813,
+        0.174533,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        -0.069813,
+        0.174533,
+        0.0,
+        -1.48353,
+        1.047198,
+        0.275307,
+        0.0,
+        0.0,
+        0.0,
+        0.452354,
+        0.10656,
+        1.483154,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "follow-through-arm-collapsed-early-01",
+      "phase": "follow-through",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "elbow_right",
+          "principle": "terminal-wrist-flexion",
+          "deltaDeg": 49.803
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": 0.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": -3.0,
+        "knee_right": -4.0,
+        "ankle_y_right": 10.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": -3.0,
+        "knee_left": -4.0,
+        "ankle_y_left": 10.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -85.0,
+        "shoulder2_right": 60.0,
+        "elbow_right": 9.8027,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.30567
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.4473,
+          0.12291,
+          1.49557
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.305672,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        -0.069813,
+        0.174533,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        -0.069813,
+        0.174533,
+        0.0,
+        -1.48353,
+        1.047198,
+        0.17109,
+        0.0,
+        0.0,
+        0.0,
+        0.447302,
+        0.122908,
+        1.495565,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "follow-through-dropped-shooting-arm-00",
+      "phase": "follow-through",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "shoulder1_right",
+          "principle": "terminal-wrist-flexion",
+          "deltaDeg": 52.008
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 0.0,
+        "knee_right": -4.0,
+        "ankle_y_right": 10.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 0.0,
+        "knee_left": -4.0,
+        "ankle_y_left": 10.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -32.992,
+        "shoulder2_right": 60.0,
+        "elbow_right": -40.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.3053
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.57327,
+          0.10907,
+          1.69798
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.305302,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.069813,
+        0.174533,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.069813,
+        0.174533,
+        0.0,
+        -0.57582,
+        1.047198,
+        -0.698132,
+        0.0,
+        0.0,
+        0.0,
+        0.573268,
+        0.109069,
+        1.697979,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "follow-through-dropped-shooting-arm-01",
+      "phase": "follow-through",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "shoulder1_right",
+          "principle": "terminal-wrist-flexion",
+          "deltaDeg": 43.997
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -3.0,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 0.0,
+        "knee_right": -4.0,
+        "ankle_y_right": 10.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 0.0,
+        "knee_left": -4.0,
+        "ankle_y_left": 10.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -41.0031,
+        "shoulder2_right": 60.0,
+        "elbow_right": -40.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.3053
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.57523,
+          0.11081,
+          1.69259
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.305302,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05236,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.069813,
+        0.174533,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.069813,
+        0.174533,
+        0.0,
+        -0.715639,
+        1.047198,
+        -0.698132,
+        0.0,
+        0.0,
+        0.0,
+        0.575234,
+        0.11081,
+        1.692588,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "id": "follow-through-forward-collapse-00",
+      "phase": "follow-through",
+      "kind": "faulted",
+      "seed": 20260723,
+      "faults": [
+        {
+          "joint": "abdomen_y",
+          "principle": "head-stabilized",
+          "deltaDeg": -18.103
+        }
+      ],
+      "jointAnglesDeg": {
+        "abdomen_z": 0.0,
+        "abdomen_y": -21.1034,
+        "abdomen_x": 0.0,
+        "hip_x_right": 0.0,
+        "hip_z_right": 0.0,
+        "hip_y_right": 18.0,
+        "knee_right": -4.0,
+        "ankle_y_right": 37.0,
+        "ankle_x_right": 0.0,
+        "hip_x_left": 0.0,
+        "hip_z_left": 0.0,
+        "hip_y_left": 18.0,
+        "knee_left": -4.0,
+        "ankle_y_left": 37.0,
+        "ankle_x_left": 0.0,
+        "shoulder1_right": -85.0,
+        "shoulder2_right": 60.0,
+        "elbow_right": -40.0,
+        "shoulder1_left": 0.0,
+        "shoulder2_left": 0.0,
+        "elbow_left": 0.0
+      },
+      "root": {
+        "pos": [
+          0.0,
+          0.0,
+          1.33142
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "ball": {
+        "pos": [
+          0.59167,
+          0.10399,
+          1.69223
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "qpos": [
+        0.0,
+        0.0,
+        1.331417,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.368324,
+        0.0,
+        0.0,
+        0.0,
+        0.314159,
+        -0.069813,
+        0.645772,
+        0.0,
+        0.0,
+        0.0,
+        0.314159,
+        -0.069813,
+        0.645772,
+        0.0,
+        -1.48353,
+        1.047198,
+        -0.698132,
+        0.0,
+        0.0,
+        0.0,
+        0.591669,
+        0.103993,
+        1.692226,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gate": {
+        "jointLimits": true,
+        "comInSupport": true,
+        "maxPenetrationM": 0.001,
+        "valid": true
+      },
+      "valid": true
+    }
+  ]
+}

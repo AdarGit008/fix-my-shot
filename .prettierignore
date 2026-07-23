@@ -4,6 +4,9 @@ coverage
 node_modules
 package-lock.json
 
+# Generated pose library (tools/posegen owns its format; regenerate, don't hand-edit).
+apps/web/src/poses/library.json
+
 # Prose, decisions, and append-only records are hand-authored, not Prettier-managed.
 # (Reformatting records/ would violate REC-01's append-only invariant.)
 *.md
