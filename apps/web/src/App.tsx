@@ -1,4 +1,5 @@
-import { OBJECTIVE } from '@fix-my-shot/basketball';
+import type { Pose } from '@fix-my-shot/core';
+import { OBJECTIVE, PHASES } from '@fix-my-shot/basketball';
 import { grade } from '@fix-my-shot/scoring';
 import { SpikePage } from './spike/SpikePage';
 
@@ -12,11 +13,26 @@ export function App() {
     return <SpikePage />;
   }
 
-  const result = grade(OBJECTIVE, { 'elbow-flare': 10 });
+  const followThrough = PHASES.find((phase) => phase.id === 'follow-through');
+  const pose: Pose | undefined = followThrough && {
+    phase: followThrough,
+    jointAngles: {},
+    implement: { id: 'ball', position: [0, 0, 0] },
+  };
+  const report = pose
+    ? grade(pose, OBJECTIVE, {
+        'terminal-wrist-flexion': true,
+        'head-stabilized': true,
+        'repeatable-symmetric-geometry': true,
+      })
+    : undefined;
   return (
     <main>
       <h1>fix-my-shot</h1>
-      <p>Scaffold online. Sample form grade through the package seam: {result.score}/100.</p>
+      <p>
+        Scaffold online. Sample form grade through the package seam:{' '}
+        {report ? `${report.grade}/100` : 'n/a'}.
+      </p>
       <p>
         <a href="?spike">→ engine spike (issue #6): MuJoCo WASM benchmark</a>
       </p>
