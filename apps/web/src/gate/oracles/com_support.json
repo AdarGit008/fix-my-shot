@@ -1,0 +1,64 @@
+{
+ "cases": [
+  {
+   "pose_id": "stance-clean",
+   "subtree_com_0": [
+    0.011214270189209513,
+    -0.022046598399147677,
+    0.8793333080092335
+   ],
+   "subtree_com_1": [
+    0.009599002384780748,
+    -0.010806950214127337,
+    0.8683835573319536
+   ]
+  },
+  {
+   "pose_id": "dip-clean",
+   "subtree_com_0": [
+    0.01604326158828369,
+    -0.01474143735152449,
+    0.8434704897915262
+   ],
+   "subtree_com_1": [
+    0.013518092059660815,
+    -0.006671915326411523,
+    0.8353666624398245
+   ]
+  },
+  {
+   "pose_id": "set-release-clean",
+   "subtree_com_0": [
+    0.038731111203377536,
+    0.004417605436793338,
+    0.891539461332377
+   ],
+   "subtree_com_1": [
+    0.02934290848520539,
+    0.006520291528958743,
+    0.877364633862954
+   ]
+  },
+  {
+   "pose_id": "loading-elbow-flared-out-00",
+   "subtree_com_0": [
+    0.012230279814219492,
+    -0.02560107769581164,
+    0.8967502243929616
+   ],
+   "subtree_com_1": [
+    0.01157874096669052,
+    -0.012762923269650025,
+    0.8841926385937245
+   ]
+  }
+ ],
+ "note": "subtree_com rows after configuration.update(qpos): row 0 = world body subtree (entire model incl. ball), row 1 = torso subtree (robot only). mink ComTask uses row 1.",
+ "provenance": {
+  "generated_for": "fix-my-shot issue #9 TS gate port",
+  "mink_commit": "44c8a6ab66d27d06249f9018334a51662605e3e4",
+  "mink_version": "1.2.0",
+  "mujoco_version": "3.10.0",
+  "numpy_version": "2.5.1"
+ }
+}
