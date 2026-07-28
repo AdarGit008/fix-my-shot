@@ -104,6 +104,95 @@ function gRow(g: Float64Array, i: number, n: number): Float64Array {
 }
 
 /**
+ * Final polish at the optimal active set. The incremental primal/dual updates
+ * accumulate drift (observed up to ~2e-5 on ill-conditioned gate problems),
+ * and the main loop's violation scan skips ACTIVE rows entirely — so before
+ * certifying found=true, re-solve the equality-constrained KKT system on the
+ * final active set from scratch (λ = (N P⁻¹ Nᵀ)⁻¹ (N x_unc − h_A),
+ * x* = x_unc − P⁻¹Nᵀλ) and verify EVERY row of Gx ≤ h. Falls back to the
+ * incremental iterate when the refit is unusable (dependent active rows or a
+ * negative refined multiplier), and refuses to certify (found=false) if even
+ * the fallback violates tolerance — for the gate a spurious reject is safe; a
+ * spurious accept is not.
+ */
+function finishSolution(
+  l: Float64Array,
+  negQ: Float64Array,
+  g: Float64Array,
+  h: Float64Array,
+  n: number,
+  m: number,
+  x: Float64Array,
+  active: readonly number[],
+  lambda: readonly number[],
+  iterations: number,
+  multipliers: Float64Array,
+): QpResult {
+  const verified = (cand: Float64Array): boolean => {
+    for (let i = 0; i < m; i++) {
+      const hi = h[i] ?? 0;
+      if (dot(gRow(g, i, n), cand, n) - hi > VIOL_TOL * (1 + Math.abs(hi))) return false;
+    }
+    return true;
+  };
+
+  const k = active.length;
+  const xUnc = cholSolve(l, negQ, n);
+  let refined: Float64Array | null = null;
+  let refinedLambda: Float64Array | null = null;
+  if (k === 0) {
+    refined = xUnc;
+    refinedLambda = new Float64Array(0);
+  } else {
+    const rows: Float64Array[] = [];
+    const ys: Float64Array[] = []; // yⱼ = P⁻¹nⱼ
+    for (const a of active) {
+      const row = gRow(g, a, n);
+      rows.push(row);
+      ys.push(cholSolve(l, row, n));
+    }
+    const s = new Float64Array(k * k); // S = N P⁻¹ Nᵀ (symmetric PD when rows independent)
+    const rhs = new Float64Array(k);
+    for (let j = 0; j < k; j++) {
+      for (let i = 0; i < k; i++)
+        s[j * k + i] = dot(rows[j] ?? new Float64Array(n), ys[i] ?? new Float64Array(n), n);
+      rhs[j] = dot(rows[j] ?? new Float64Array(n), xUnc, n) - (h[active[j] ?? 0] ?? 0);
+    }
+    const ls = cholesky(s, k);
+    if (ls !== null) {
+      const lam = cholSolve(ls, rhs, k);
+      let nonNegative = true;
+      for (let j = 0; j < k; j++) if ((lam[j] ?? 0) < -VIOL_TOL) nonNegative = false;
+      if (nonNegative) {
+        const cand = Float64Array.from(xUnc);
+        for (let j = 0; j < k; j++) {
+          const yj = ys[j];
+          const lj = lam[j] ?? 0;
+          if (yj === undefined) continue;
+          for (let i = 0; i < n; i++) cand[i] = (cand[i] ?? 0) - lj * (yj[i] ?? 0);
+        }
+        refined = cand;
+        refinedLambda = lam;
+      }
+    }
+  }
+
+  if (refined !== null && refinedLambda !== null && verified(refined)) {
+    active.forEach((row, j) => {
+      multipliers[row] = Math.max(0, refinedLambda[j] ?? 0);
+    });
+    return { x: refined, found: true, iterations, multipliers };
+  }
+  if (verified(x)) {
+    active.forEach((row, j) => {
+      multipliers[row] = lambda[j] ?? 0;
+    });
+    return { x, found: true, iterations, multipliers };
+  }
+  return { x, found: false, iterations, multipliers };
+}
+
+/**
  * Solve min ½xᵀPx + qᵀx s.t. Gx ≤ h with P symmetric positive-definite.
  *
  * @param p row-major n×n cost matrix (symmetric PD)
@@ -157,10 +246,8 @@ export function solveQp(
       }
     }
     if (pick === -1) {
-      active.forEach((row, j) => {
-        multipliers[row] = lambda[j] ?? 0;
-      });
-      return { x, found: true, iterations, multipliers };
+      // Optimal active set reached — polish and verify before certifying.
+      return finishSolution(l, negQ, g, h, n, m, x, active, lambda, iterations, multipliers);
     }
 
     // Drive the multiplier of `pick` up from zero, dropping any active

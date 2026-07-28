@@ -133,11 +133,16 @@ function maxPenetration(engine: GateEngine): number {
  * Exported for the projection's ComSupportLimit (limits.ts) so both sides build
  * the support polygon from the identical construction. */
 export function footprint(engine: GateEngine): Vec2[] {
+  // Resolve ids BEFORE acquiring views: the first call per engine runs
+  // mj_name2id with JS strings, whose Embind marshalling mallocs on the WASM
+  // heap — a growth there would detach views taken earlier (the loop body
+  // itself performs no allocating calls).
+  const ids = footGeomIds(engine);
   const xpos = engine.data.geom_xpos; // Float64Array view, (ngeom, 3)
   const xmat = engine.data.geom_xmat; // Float64Array view, (ngeom, 9) row-major
   const size = engine.model.geom_size; // Float64Array view, (ngeom, 3)
   const pts: Vec2[] = [];
-  for (const g of footGeomIds(engine)) {
+  for (const g of ids) {
     const half = size[g * 3 + 1] as number;
     const cx = xpos[g * 3] as number;
     const cy = xpos[g * 3 + 1] as number;
@@ -166,6 +171,11 @@ export function evaluateQpos(engine: GateEngine, qpos: ArrayLike<number>): PoseG
   if (qpos.length !== (q.length as number)) {
     throw new Error(`gate: qpos has length ${qpos.length}, model expects nq=${q.length}`);
   }
+  // Reentrancy: evaluate may be called mid-projection (e.g. from an extraTasks/
+  // extraLimits callback observing candidate poses). Snapshot the resident qpos
+  // and re-establish the projection's kinematic state before returning, so the
+  // classifier never clobbers a live GateConfiguration sharing this MjData.
+  const saved = Float64Array.from(q);
   q.set(qpos);
   mj.mj_forward(model, data);
 
@@ -173,5 +183,12 @@ export function evaluateQpos(engine: GateEngine, qpos: ArrayLike<number>): PoseG
   const maxPenetrationM = maxPenetration(engine);
   const comInSupport = pointInHull(comXy(engine), convexHull(footprint(engine)));
   const valid = jointLimits && comInSupport && maxPenetrationM <= MAX_PENETRATION_M;
+
+  // Restore (re-acquire the view — the checks above touch the contact buffer,
+  // which can allocate) and rebuild the kinematics-derived quantities the
+  // projection pipeline reads (xpos/xmat, jacobians, subtree_com).
+  data.qpos.set(saved);
+  mj.mj_kinematics(model, data);
+  mj.mj_comPos(model, data);
   return { jointLimits, comInSupport, maxPenetrationM, valid };
 }

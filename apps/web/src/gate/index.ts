@@ -80,7 +80,7 @@ export interface ProjectResult {
   /** Authority verdict for `qpos` (of the projected pose when accepted, of the reverted input otherwise). */
   gate: PoseGate;
   accepted: boolean;
-  /** Projection iterations actually run. */
+  /** Integration steps applied to the configuration (0 ⇒ qpos untouched). */
   steps: number;
 }
 
@@ -142,7 +142,7 @@ export function createGate(engine: GateEngine): Gate {
       const footLeft = new FrameTask('body', footLeftBody, 5, 5, 0.5);
       footLeft.setTargetFromConfiguration(configuration);
 
-      const posture = new PostureTask(configuration, 0.01);
+      const posture = new PostureTask(configuration, 0.01, 0.5);
       posture.setTarget(from);
 
       const dragPairs: [number, number][] =
@@ -161,7 +161,10 @@ export function createGate(engine: GateEngine): Gate {
         if (!result.found) return reject(steps);
         let vMax = 0;
         for (const vi of result.v) vMax = Math.max(vMax, Math.abs(vi));
-        if (vMax < stopVelocity) break;
+        if (vMax < stopVelocity) {
+          steps++; // count the step that was just integrated before stopping
+          break;
+        }
       }
 
       const projected = Float64Array.from(configuration.q);

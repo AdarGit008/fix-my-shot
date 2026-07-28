@@ -3,7 +3,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import sceneXml from '../spike/scene.xml?raw';
 import { POSE_LIBRARY } from '../poses';
-import { createGate, loadGateEngine, type Gate } from './index';
+import { createGate, loadGateEngine, type Gate, type Limit } from './index';
 
 type Engine = Awaited<ReturnType<typeof loadGateEngine>>;
 
@@ -73,6 +73,23 @@ describe('createGate facade', () => {
     expect(result.accepted).toBe(false);
     // Reject-and-revert: the caller gets their input back, byte for byte.
     expect(Array.from(result.qpos)).toEqual(Array.from(broken));
+  });
+
+  it('evaluate() is reentrant with project() (authority probes mid-projection are harmless)', () => {
+    const drag = { frameType: 'geom' as const, frameId: 16, position: [0.31, -0.33, 0.93] };
+    const baseline = gate.project(stanceClean.qpos, drag);
+    // A limit that peeks at the authority every step. Without the reentrancy
+    // guard in evaluateQpos this clobbers the projection's MjData state.
+    const probing: Limit = {
+      computeQpInequalities: (config) => {
+        gate.evaluate(config.q);
+        return null;
+      },
+    };
+    const probed = gate.project(stanceClean.qpos, drag, { extraLimits: [probing] });
+    expect(probed.accepted).toBe(baseline.accepted);
+    expect(probed.steps).toBe(baseline.steps);
+    expect(Array.from(probed.qpos)).toEqual(Array.from(baseline.qpos));
   });
 
   it('is deterministic', () => {
