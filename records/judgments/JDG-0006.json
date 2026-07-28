@@ -1,0 +1,10 @@
+{
+  "record": "judgment/1",
+  "id": "JDG-0006",
+  "kind": "sign-off",
+  "date": "2026-07-28",
+  "by": "Adar",
+  "subject": "baseline.repo.json",
+  "reason": "Declare lanes.families [chore/*, dependabot/*] — the repo's real non-lane branch inventory (chore/* deps housekeeping, precedent PR #25; dependabot/* bot update branches) so FLOW-04 judges placement against actual practice instead of failing every legitimate non-lane branch. Additive posture declaration, no axis weakened; namespace and lease semantics unchanged.",
+  "review_by": "2027-07-28"
+}
