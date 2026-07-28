@@ -17,6 +17,16 @@ updates:
     groups:
       minor-and-patch:
         update-types: ["minor", "patch"]
+    ignore:
+      # typescript-eslint hard-blocks TS 7.0.x at import time and plans support
+      # only for TS >=7.1 (typescript-eslint/typescript-eslint#10940). Let 7.1+
+      # PRs through; drop this rule when typescript-eslint ships TS 7 support.
+      - dependency-name: "typescript"
+        versions: ["7.0.x"]
+      # @vitejs/plugin-react >=6 peer-requires vite ^8; taking it means a
+      # deliberate vite 6->8 + vitest 2->4 migration. Remove when that lands.
+      - dependency-name: "@vitejs/plugin-react"
+        versions: [">=6.0.0"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
