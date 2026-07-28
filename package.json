@@ -26,7 +26,7 @@
     "setup": "bin/setup"
   },
   "devDependencies": {
-    "@eslint/js": "^9.15.0",
+    "@eslint/js": "^10.0.1",
     "@types/node": "^22.10.1",
     "@vitejs/plugin-react": "^5.2.0",
     "eslint": "^9.15.0",
