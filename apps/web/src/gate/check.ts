@@ -129,8 +129,10 @@ function maxPenetration(engine: GateEngine): number {
 
 /** model.py footprint: xy of every foot-capsule endpoint (8 points). Each endpoint
  * is geom center ± half-length along the capsule's local z axis — column 2 of the
- * row-major 3x3 geom_xmat; only the x,y components matter for the support hull. */
-function footprint(engine: GateEngine): Vec2[] {
+ * row-major 3x3 geom_xmat; only the x,y components matter for the support hull.
+ * Exported for the projection's ComSupportLimit (limits.ts) so both sides build
+ * the support polygon from the identical construction. */
+export function footprint(engine: GateEngine): Vec2[] {
   const xpos = engine.data.geom_xpos; // Float64Array view, (ngeom, 3)
   const xmat = engine.data.geom_xmat; // Float64Array view, (ngeom, 9) row-major
   const size = engine.model.geom_size; // Float64Array view, (ngeom, 3)
