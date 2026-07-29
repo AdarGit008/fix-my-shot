@@ -23,10 +23,6 @@ updates:
       # PRs through; drop this rule when typescript-eslint ships TS 7 support.
       - dependency-name: "typescript"
         versions: ["7.0.x"]
-      # @vitejs/plugin-react >=6 peer-requires vite ^8; taking it means a
-      # deliberate vite 6->8 + vitest 2->4 migration. Remove when that lands.
-      - dependency-name: "@vitejs/plugin-react"
-        versions: [">=6.0.0"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
