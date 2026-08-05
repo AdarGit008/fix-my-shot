@@ -30,3 +30,4 @@ export {
   type HandBallContact,
   type TargetGeometry,
 } from './scene';
+export { CONTACTS, DIRECTIONS, LANDMARKS, RECIPES } from './measure';

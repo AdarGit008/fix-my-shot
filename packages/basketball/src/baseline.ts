@@ -2,8 +2,10 @@
 // (the five per-phase tables). Each row keeps the doc's exact `name` / `range` / `tierText`
 // / `readFrom` cells so test/principles-drift.test.ts can round-trip the data against the
 // doc, plus a parsed `tier` and a structural `criterion` the scorer consumes. The doc is the
-// single source of truth (ADR-0004); the `criterion` is a first-pass structural reading —
-// full measurement + deduction semantics land with the scorer (#11).
+// single source of truth (ADR-0004); the `criterion` is the SCORER-FACING reading (#11):
+// where it differs from the doc's headline numbers it encodes the row's own scoring
+// instruction (deduction envelopes, gross-only presence checks) — each such row carries
+// an inline comment. The doc's verbatim cells above it stay round-tripped by the drift test.
 
 import type { Criterion, FormObjective, Principle, PrincipleTier } from '@fix-my-shot/core';
 import type { PhaseId } from './phases';
@@ -59,7 +61,9 @@ export const BASELINE: readonly BaselinePrinciple[] = [
     tierText: `guideline`,
     readFrom: `inter-foot distance ÷ estimated stature; wider end mildly favored, repeatable narrower base never penalized *(stature is the only sourced normalizer; hip-width basis was unsourced — resolved gap)*`,
     tier: 'guideline',
-    criterion: { kind: 'band', min: 0.15, max: 0.2, unit: 'stature' },
+    // Deduction envelope = the row's never-penalized band (deducting inside it would
+    // penalize in-range style — SPEC acceptance #3); 0.15–0.20 stays the preferred band.
+    criterion: { kind: 'band', min: 0.11, max: 0.22, unit: 'stature' },
   },
   {
     id: 'foot-stagger',
@@ -79,7 +83,9 @@ export const BASELINE: readonly BaselinePrinciple[] = [
     tierText: `guideline`,
     readFrom: `trunk-to-vertical angle (no degree band established)`,
     tier: 'guideline',
-    criterion: { kind: 'qualitative' },
+    // Presence = no marked hunch (gross-only engineering cutoff in measure.ts — the row
+    // itself establishes no degree band).
+    criterion: { kind: 'presence' },
   },
   {
     id: 'trunk-inclination',
@@ -89,7 +95,8 @@ export const BASELINE: readonly BaselinePrinciple[] = [
     tierText: `style-variant`,
     readFrom: `trunk-to-floor angle; reward stability (via stone #5), not a template — *retiered from written-in-stone; the stability requirement flows from #5*`,
     tier: 'style-variant',
-    criterion: { kind: 'qualitative' },
+    // Style flag only (never deducted): presence = not an extreme tilt.
+    criterion: { kind: 'presence' },
   },
   {
     id: 'shoulders-squared',
@@ -99,7 +106,8 @@ export const BASELINE: readonly BaselinePrinciple[] = [
     tierText: `style-variant`,
     readFrom: `shoulder/hip line vs ball→target; penalize only fully-sideways`,
     tier: 'style-variant',
-    criterion: { kind: 'qualitative' },
+    // Style flag only: presence = not fully sideways.
+    criterion: { kind: 'presence' },
   },
   {
     id: 'head-toward-target',
@@ -173,7 +181,11 @@ export const BASELINE: readonly BaselinePrinciple[] = [
     tierText: `**written-in-stone** *(qualitative)*`,
     readFrom: `legs near-extended, on toes, COM over take-off spot (numbers carried at guideline confidence)`,
     tier: 'written-in-stone',
-    criterion: { kind: 'band', min: 160, max: 175, unit: 'deg' },
+    // The 160–175° figure applies near release; the pose-readable loading check is the
+    // row's qualitative reading (legs near-extending, drive up) — scored as presence
+    // with a gross-only engineering cutoff in measure.ts (numbers carried at guideline
+    // confidence per the row).
+    criterion: { kind: 'presence' },
   },
   {
     id: 'elbow-under-loading',
@@ -183,7 +195,9 @@ export const BASELINE: readonly BaselinePrinciple[] = [
     tierText: `guideline`,
     readFrom: `frontal-view forearm-vs-vertical; **do not enforce a near-vertical band before release**; penalize only gross flare at release (resolved: see the Set/Release row)`,
     tier: 'guideline',
-    criterion: { kind: 'qualitative' },
+    // Presence = no gross flare during the gather (the row forbids enforcing a
+    // near-vertical band before release).
+    criterion: { kind: 'presence' },
   },
   {
     id: 'shoulder-elevation',
@@ -193,7 +207,8 @@ export const BASELINE: readonly BaselinePrinciple[] = [
     tierText: `style-variant`,
     readFrom: `trunk-vs-upper-arm angle; never a scored ideal *(false-precision 59.7–85.3° band dropped — no source)*`,
     tier: 'style-variant',
-    criterion: { kind: 'qualitative' },
+    // Style flag only: presence = the arm is not simply hanging.
+    criterion: { kind: 'presence' },
   },
   {
     id: 'wrist-cocked',
@@ -265,7 +280,9 @@ export const BASELINE: readonly BaselinePrinciple[] = [
     tierText: `guideline`,
     readFrom: `frontal forearm-vs-vertical; treat as a **monotonic scale** (≤~8° good, ~8–15° caution), penalize only **gross** flare >~25°; never penalize in-range (non-discriminating; **free-throw-scoped** — for jump/3-pt keep only the >25° gross penalty)`,
     tier: 'guideline',
-    criterion: { kind: 'band', min: 5, max: 20, unit: 'deg' },
+    // Deduction envelope per the row: penalize only GROSS flare (>~25°), never in-range;
+    // below-5° values are good, not faults — so the envelope floor is 0.
+    criterion: { kind: 'band', min: 0, max: 25, unit: 'deg' },
   },
   {
     id: 'elbow-l-at-set',
@@ -345,7 +362,8 @@ export const BASELINE: readonly BaselinePrinciple[] = [
     tierText: `style-variant *(weak)*`,
     readFrom: `eye→target line vs ball silhouette; flag only full occlusion`,
     tier: 'style-variant',
-    criterion: { kind: 'qualitative' },
+    // Style flag only: presence = sightline not fully occluded.
+    criterion: { kind: 'presence' },
   },
   {
     id: 'set-point-height-motion',
@@ -365,7 +383,8 @@ export const BASELINE: readonly BaselinePrinciple[] = [
     tierText: `guideline`,
     readFrom: `wide band; flag only gross load-at-release mismatch (heel-off **not** universal; free throw is planted)`,
     tier: 'guideline',
-    criterion: { kind: 'qualitative' },
+    // Presence = no gross load-at-release mismatch (wide band per the row).
+    criterion: { kind: 'presence' },
   },
 
   // --- 5 · Follow-through / Inertia ---

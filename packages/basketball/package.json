@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "The basketball plugin: concrete shooting phases and the principle baseline as data. Sport-specific vocabulary lives here, never in @fix-my-shot/core (ADR-0006).",
+  "description": "The basketball plugin: concrete shooting phases, the principle baseline as data, and the measurement recipes reading it off a pose snapshot. Sport-specific vocabulary lives here, never in @fix-my-shot/core (ADR-0006).",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@fix-my-shot/core": "*"
+    "@fix-my-shot/core": "*",
+    "@fix-my-shot/scoring": "*"
   }
 }
