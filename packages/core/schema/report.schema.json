@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "fix-my-shot/report.schema.json",
+  "title": "Report",
+  "description": "The structured result of grading one pose (ADR-0008/0009, issue #12): a 0-100 form grade (never a probability), the pose's labelled phase, one result per phase-appropriate principle (tier, criterion, membership, honesty and stake), and the leverage-ranked, stability-gated fix list (cluster + external-focus cue; raw per-parameter numbers are never part of the report).",
+  "version": 1,
+  "type": "object",
+  "required": ["grade", "phase", "principleResults", "fixes"],
+  "additionalProperties": false,
+  "properties": {
+    "grade": { "type": "number", "minimum": 0, "maximum": 100 },
+    "phase": { "type": "string", "minLength": 1 },
+    "principleResults": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/principleResult" }
+    },
+    "fixes": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/rankedFix" }
+    }
+  },
+  "definitions": {
+    "criterion": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "min", "max", "unit"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "enum": ["band"] },
+            "min": { "type": "number" },
+            "max": { "type": "number" },
+            "unit": { "type": "string" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "enum": ["presence", "direction", "symmetry", "qualitative"] }
+          }
+        }
+      ]
+    },
+    "principleResult": {
+      "type": "object",
+      "required": ["principleId", "tier", "criterion", "measured", "satisfied", "deduction", "atStake"],
+      "additionalProperties": false,
+      "properties": {
+        "principleId": { "type": "string", "minLength": 1 },
+        "tier": { "enum": ["written-in-stone", "guideline", "style-variant"] },
+        "criterion": { "$ref": "#/definitions/criterion" },
+        "measured": { "type": "boolean" },
+        "satisfied": { "type": "boolean" },
+        "deduction": { "type": "number", "minimum": 0 },
+        "atStake": { "type": "number", "minimum": 0 }
+      }
+    },
+    "rankedFix": {
+      "type": "object",
+      "required": ["principleId", "cluster", "cue", "leverage"],
+      "additionalProperties": false,
+      "properties": {
+        "principleId": { "type": "string", "minLength": 1 },
+        "cluster": { "enum": ["base", "eyes", "elbow-alignment", "follow-through"] },
+        "cue": { "type": "string", "minLength": 1 },
+        "leverage": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}
