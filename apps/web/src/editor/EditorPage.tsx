@@ -1,6 +1,9 @@
-// Pose editor page (issue #10, ADR-0009/0010) — the user-facing edit step of the
-// core loop: pick a phase-labelled library pose, drag joints or the ball inside
-// the phase envelope, watch the gate accept or visibly reject-and-revert.
+// The core loop in the app shell (issues #10 + #14, SPEC §2): pick a
+// phase-labelled pose from the generated library (body + ball + floor + the
+// virtual target), fix the posture inside the phase envelope behind the gate
+// (ADR-0009/0010), re-grade deterministically on every accepted edit, and read
+// the ranked report; each sitting records to the local progress store (#13),
+// so the next session starts from the last top fix.
 //
 // Architecture: MujocoView renders (static mode, its own MjData); the gate gets a
 // SECOND MjData on the same compiled model, so projections never scramble the
@@ -9,11 +12,21 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { PHASES } from '@fix-my-shot/basketball';
+import { FREE_THROW_TARGET, PHASES, type PhaseId } from '@fix-my-shot/basketball';
+import type { Report } from '@fix-my-shot/core';
 import sceneXml from '../spike/scene.xml?raw';
 import { MujocoView, loadEngine } from '../spike/mujoco-view';
 import { createGate, type Gate, type GateEngine } from '../gate';
 import { POSE_LIBRARY } from '../poses';
+import { buildReport } from '../report';
+import {
+  continuityAgainstReport,
+  createProgressStore,
+  entryFromReport,
+  type ProgressStore,
+  type TopFixContinuity,
+} from '../progress/store';
+import { ReportPanel } from './ReportPanel';
 import type { EditorVerdict } from './session';
 import { EditorSession, createBoundsProvider, type BoundsProvider } from './session';
 
@@ -46,6 +59,7 @@ export function EditorPage() {
   const viewRef = useRef<MujocoView | null>(null);
   const sessionRef = useRef<EditorSession | null>(null);
   const gateRef = useRef<Gate | null>(null);
+  const engineRef = useRef<GateEngine | null>(null);
   const boundsRef = useRef<BoundsProvider | null>(null);
 
   const dragRef = useRef<{
@@ -63,6 +77,38 @@ export function EditorPage() {
   const [canUndo, setCanUndo] = useState(false);
   const [flash, setFlash] = useState<'none' | 'accept' | 'reject'>('none');
   const flashTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // The loop's report + progress wiring (#13/#14): one session per loaded
+  // pose. A sitting is RECORDED only once the user engages (first accepted
+  // edit) — drive-by pose loads never pollute the history or continuity —
+  // and every re-grade after that upserts the same entry.
+  const [report, setReport] = useState<Report | null>(null);
+  const [continuity, setContinuity] = useState<TopFixContinuity | null>(null);
+  const storeRef = useRef<ProgressStore | null>(null);
+  const sittingRef = useRef<{ id: string; engaged: boolean } | null>(null);
+
+  /** Re-grade a committed pose, render the report, and (once engaged) record. */
+  const regrade = useCallback(
+    (phase: PhaseId, qpos: Float64Array, forPoseId: string, engages: boolean) => {
+      const engine = engineRef.current;
+      const gate = gateRef.current;
+      if (!engine || !gate) return;
+      const next = buildReport(engine, gate, phase, qpos);
+      setReport(next);
+      const store = storeRef.current;
+      const sitting = sittingRef.current;
+      if (store && sitting) {
+        if (engages) sitting.engaged = true;
+        if (sitting.engaged) {
+          store.record(entryFromReport(sitting.id, new Date().toISOString(), forPoseId, next));
+        }
+        // Live continuity: the last STORED sitting's fix vs this read.
+        const others = store.entries().filter((e) => e.sessionId !== sitting.id);
+        setContinuity(continuityAgainstReport(others, next));
+      }
+    },
+    [],
+  );
 
   /** Push the session's display pose into the render view. */
   const syncView = useCallback(() => {
@@ -89,8 +135,12 @@ export function EditorPage() {
       setVerdict(null);
       setCanUndo(false);
       syncView();
+      // A fresh sitting: new session id; grade the starting pose (recording
+      // begins only once the user edits).
+      sittingRef.current = { id: `${id}@${new Date().toISOString()}`, engaged: false };
+      regrade(pose.phase as PhaseId, session.committedQpos, id, false);
     },
-    [syncView],
+    [regrade, syncView],
   );
 
   useEffect(() => {
@@ -106,11 +156,36 @@ export function EditorPage() {
         // The gate's own MjData on the shared compiled model (see header).
         const gateData = view.registry.track(new mj.MjData(view.model), 'gate-data');
         const engine: GateEngine = { mj, model: view.model, data: gateData };
+        engineRef.current = engine;
         const gate = createGate(engine);
         gateRef.current = gate;
         const bounds = createBoundsProvider(engine);
         boundsRef.current = bounds;
         sessionRef.current = new EditorSession(gate, bounds);
+        try {
+          storeRef.current = createProgressStore(window.localStorage);
+        } catch {
+          storeRef.current = null; // storage unavailable: the loop still runs, unrecorded
+        }
+
+        // The virtual target (ADR-0009): rim ring + stanchion at the nominal
+        // free-throw geometry — a direction reference, nothing travels to it.
+        const azimuth = (FREE_THROW_TARGET.azimuthDeg * Math.PI) / 180;
+        const rimX = Math.cos(azimuth) * FREE_THROW_TARGET.distanceAheadM;
+        const rimY = Math.sin(azimuth) * FREE_THROW_TARGET.distanceAheadM;
+        const rim = new THREE.Mesh(
+          new THREE.TorusGeometry(0.2286, 0.012, 10, 40),
+          new THREE.MeshStandardMaterial({ color: 0xe8590c, roughness: 0.6 }),
+        );
+        rim.position.set(rimX, rimY, FREE_THROW_TARGET.rimHeightM); // mj z-up coords
+        view.mjRoot.add(rim);
+        const pole = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.02, 0.02, FREE_THROW_TARGET.rimHeightM, 8),
+          new THREE.MeshStandardMaterial({ color: 0x30363d, roughness: 0.8 }),
+        );
+        pole.geometry.rotateX(Math.PI / 2); // cylinder axis → mj z
+        pole.position.set(rimX + 0.35, rimY, FREE_THROW_TARGET.rimHeightM / 2);
+        view.mjRoot.add(pole);
 
         view.mode = 'static';
         view.start();
@@ -130,6 +205,7 @@ export function EditorPage() {
       boundsRef.current?.dispose();
       viewRef.current?.dispose();
       gateRef.current = null;
+      engineRef.current = null;
       boundsRef.current = null;
       sessionRef.current = null;
       viewRef.current = null;
@@ -231,10 +307,14 @@ export function EditorPage() {
             : { accepted: false, detail: describeRejection(result) },
         );
         setCanUndo(session.canUndo);
+        if (result.accepted && session.phase && session.pose) {
+          // The loop's re-grade step: deterministic, within budget (#14).
+          regrade(session.phase, session.committedQpos, session.pose.id, true);
+        }
       }
       syncView();
     },
-    [pointerToMj, showVerdict, syncView],
+    [pointerToMj, regrade, showVerdict, syncView],
   );
 
   const pose = POSE_LIBRARY.poses.find((p) => p.id === poseId);
@@ -245,12 +325,16 @@ export function EditorPage() {
   return (
     <main style={S.page}>
       <header style={S.head}>
-        <h1 style={S.h1}>fix-my-shot · pose editor</h1>
+        <h1 style={S.h1}>fix-my-shot</h1>
         <p style={S.sub}>
-          Drag a joint or the ball — every edit is clamped to the pose&apos;s phase and judged by
-          the physical-validity gate (issue&nbsp;#10).{' '}
-          <a href="./" style={S.link}>
-            ← app
+          Pick a generated pose, fix the posture, watch the form re-grade — every edit stays in
+          its phase and behind the physical-validity gate.{' '}
+          <a href="?history" style={S.link}>
+            progress
+          </a>{' '}
+          ·{' '}
+          <a href="?spike" style={S.link}>
+            engine spike
           </a>
         </p>
       </header>
@@ -275,6 +359,9 @@ export function EditorPage() {
                 setCanUndo(session.canUndo);
                 setVerdict(null);
                 syncView();
+                if (session.phase && session.pose) {
+                  regrade(session.phase, session.committedQpos, session.pose.id, false);
+                }
               }}
             >
               ↶ undo edit
@@ -282,10 +369,15 @@ export function EditorPage() {
             <button
               style={S.btnGhost}
               onClick={() => {
-                sessionRef.current?.reset();
+                const session = sessionRef.current;
+                if (!session) return;
+                session.reset();
                 setCanUndo(false);
                 setVerdict(null);
                 syncView();
+                if (session.phase && session.pose) {
+                  regrade(session.phase, session.committedQpos, session.pose.id, false);
+                }
               }}
             >
               ⟲ reset pose
@@ -340,7 +432,9 @@ export function EditorPage() {
               )}
 
               <div style={S.verdictBox}>
-                {verdict === null && <span style={S.idle}>make an edit to get a verdict…</span>}
+                {verdict === null && (
+                  <span style={S.idle}>drag a limb or the ball, then release for a verdict…</span>
+                )}
                 {verdict?.accepted === true && (
                   <span style={S.ok}>✓ edit accepted — {verdict.detail}</span>
                 )}
@@ -349,11 +443,17 @@ export function EditorPage() {
                 )}
               </div>
 
+              {report && (
+                <div style={S.reportWrap}>
+                  <ReportPanel report={report} continuity={continuity} />
+                </div>
+              )}
+
               <p style={S.meta}>
-                The drag preview is the gate&apos;s own constrained projection (a few steps per
-                pointer frame — ADR-0010), so what you see while dragging already respects the
-                phase envelope; releasing runs the full projection and the three-check authority:
-                joint limits, balance, contact.
+                An off-court scaffold for your shooting eye: it trains reading and fixing form,
+                alongside — never instead of — real practice. The drag preview is the gate&apos;s
+                own constrained projection (ADR-0010); releasing runs the full projection and the
+                three-check authority: joint limits, balance, contact.
               </p>
             </>
           )}
@@ -456,6 +556,7 @@ const S: Record<string, React.CSSProperties> = {
     minHeight: 40,
     fontSize: 13.5,
   },
+  reportWrap: { marginTop: 14, borderTop: '1px solid #1b222c', paddingTop: 12 },
   idle: { color: '#6b7480' },
   ok: { color: '#3fb950' },
   bad: { color: '#f85149' },

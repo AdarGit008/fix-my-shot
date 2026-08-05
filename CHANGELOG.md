@@ -8,6 +8,25 @@ release.
 ## [Unreleased]
 
 ### Added
+- **The core loop, wired** (2026-08-06, issue #14): the default route IS the
+  product — pick a phase-labelled pose from the generated library (body + ball +
+  floor + the virtual target, now rendered as a rim ring + stanchion at the
+  ADR-0009 free-throw geometry), fix the posture behind the gate, and the form
+  re-grades deterministically on every accepted edit into the ranked report
+  (`ReportPanel`: 0–100 grade with not-a-probability framing, fixes in
+  external-focus vocabulary with the top fix leading, per-principle chips with
+  honest states incl. unmeasurable, live top-fix continuity from the previous
+  sitting). Sittings record to the #13 progress store **once engaged** (first
+  accepted edit) — drive-by pose loads never pollute history or continuity — a
+  semantics the new end-to-end verify flow surfaced and
+  `continuityAgainstReport` implements (last stored sitting vs the live
+  report). All product copy uses scaffold framing; no efficacy/transfer claims
+  (acceptance #8). **`npm run verify:loop`** (`tools/loop-verify.mjs`) drives
+  the whole loop headless across two sittings: boot → grade on load → faulted
+  pose reports fixes → accepted edit re-grades → reload → continuity from
+  localStorage → second sitting edits → history lists both — 9 steps, console
+  clean. SPEC §11 acceptance criteria 1–9 run as a checklist in the lane
+  record: all pass (the mid-range reference-machine residual from #6 stands).
 - **Minimal persistence** (2026-08-06, issue #13): the smallest real progression
   loop (ADR-0007) — localStorage-only session history with the two derived
   signals the moat needs. `apps/web/src/progress/store.ts`: versioned,

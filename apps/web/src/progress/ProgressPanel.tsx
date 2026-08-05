@@ -53,8 +53,8 @@ export function ProgressPanel() {
       {entries.length === 0 && (
         <div style={S.card}>
           <p style={S.empty}>
-            No sessions yet. Work a pose in the editor — every re-grade records here, and your
-            next visit starts from your last top fix.
+            No sessions yet. Edit a pose in the app — each sitting you work records here, and
+            your next visit starts from your last top fix.
           </p>
         </div>
       )}
