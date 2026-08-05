@@ -2,7 +2,7 @@
 
 Status: Accepted
 Supersedes: none
-Superseded-by: none
+Superseded-by: ADR-0010 (CCDIKSolver-preview clause only)
 Date: 2026-07-21
 
 ## Context

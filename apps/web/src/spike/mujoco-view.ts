@@ -220,15 +220,17 @@ export class MujocoView {
     return performance.now() - t;
   }
 
-  /** Raycast the geom meshes; return the hit MuJoCo body id + world point. */
-  raycastBody(raycaster: THREE.Raycaster): { bodyid: number; point: THREE.Vector3 } | null {
+  /** Raycast the geom meshes; return the hit MuJoCo body id, geom id + world point. */
+  raycastBody(
+    raycaster: THREE.Raycaster,
+  ): { bodyid: number; geomid: number; point: THREE.Vector3 } | null {
     const hits = raycaster.intersectObjects(this.meshes, false);
     for (const hit of hits) {
       const g = this.meshes.indexOf(hit.object as THREE.Mesh);
       if (g < 0) continue;
       const bodyid = this.model.geom_bodyid[g] as number;
       if (bodyid <= 0) continue; // 0 = worldbody (floor) — not grabbable
-      return { bodyid, point: hit.point.clone() };
+      return { bodyid, geomid: g, point: hit.point.clone() };
     }
     return null;
   }
