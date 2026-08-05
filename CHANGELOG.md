@@ -8,6 +8,22 @@ release.
 ## [Unreleased]
 
 ### Added
+- **Minimal persistence** (2026-08-06, issue #13): the smallest real progression
+  loop (ADR-0007) — localStorage-only session history with the two derived
+  signals the moat needs. `apps/web/src/progress/store.ts`: versioned,
+  corruption-graceful, capped store behind an injected Storage interface (a
+  "session" is one loaded pose being worked on; re-grades upsert one line per
+  sitting); `entryFromReport` captures pose/phase/grade/per-principle results/
+  top fix; `principleTrend` gives the across-sessions series for any principle;
+  `topFixContinuity` remembers the prior session's top fix and answers whether
+  it improved (satisfied now, or points-at-stake recovered) — including the
+  honest `null` when no later session re-measures that phase. The `?history`
+  view renders continuity ("pick up where you left off", the fix in its own
+  external-focus words), a session table, and a per-session trend strip, and
+  reads storage alone. Recording is wired into the core loop by issue #14.
+  Done-when held by an engine-backed test: two real sessions (faulted dip →
+  fixed dip) through the store yield the prior top fix, improved = true with
+  the recovered points, and the trend — from storage alone. 12 new tests.
 - **Leverage + ranked report** (2026-08-06, issue #12): the report that is the
   product — `buildReport` returns the ADR-0008 grade plus a leverage-ranked,
   stability-gated fix list in expert vocabulary. Interactive **finite-difference
