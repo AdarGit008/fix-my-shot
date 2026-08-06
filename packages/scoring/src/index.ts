@@ -30,6 +30,14 @@ export {
   signedTiltTowardDeg,
   type Vec2,
 } from './geometry';
+export {
+  computeFixes,
+  mulberry32,
+  type EvaluateAt,
+  type FixDecor,
+  type LeverageOptions,
+  type ParamSpec,
+} from './leverage';
 
 /**
  * A reading taken from a pose for one principle: numeric for a `band` criterion, boolean
@@ -207,12 +215,16 @@ export function grade(pose: Pose, objective: FormObjective, measurements: Measur
     }
     const { measured, satisfied, depth } = evaluate(principle, measurement);
     let deduction = 0;
+    let atStake = 0;
     if (!satisfied) {
       if (principle.tier === 'written-in-stone') {
-        cap = Math.min(cap, stoneCap(depth));
+        const ceiling = stoneCap(depth);
+        cap = Math.min(cap, ceiling);
+        atStake = 100 - ceiling;
       } else if (principle.tier === 'guideline') {
         deduction = deductionFor(principle, depth);
         deductionTotal += deduction;
+        atStake = deduction;
       }
       // style-variant: flagged (satisfied false), never deducted.
     }
@@ -223,6 +235,7 @@ export function grade(pose: Pose, objective: FormObjective, measurements: Measur
       measured,
       satisfied,
       deduction,
+      atStake,
     });
   }
 

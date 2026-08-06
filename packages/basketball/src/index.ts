@@ -31,3 +31,4 @@ export {
   type TargetGeometry,
 } from './scene';
 export { CONTACTS, DIRECTIONS, LANDMARKS, RECIPES } from './measure';
+export { CLUSTERS, CUES, CUE_COVERAGE, fixDecor, type ClusterId, type CueEntry } from './cues';

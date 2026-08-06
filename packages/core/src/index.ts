@@ -160,6 +160,13 @@ export interface PrincipleResult {
   readonly satisfied: boolean;
   /** Points this principle subtracted from the grade (0 when satisfied or style-variant). */
   readonly deduction: number;
+  /**
+   * Points this principle is currently holding down: the deduction for a
+   * violated guideline, the ceiling loss for a violated written-in-stone,
+   * zero when satisfied / style-variant / unmeasured. The leverage ranking's
+   * at-stake component (ADR-0008, issue #12).
+   */
+  readonly atStake: number;
 }
 
 /**

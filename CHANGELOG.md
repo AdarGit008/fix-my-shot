@@ -8,6 +8,27 @@ release.
 ## [Unreleased]
 
 ### Added
+- **Leverage + ranked report** (2026-08-06, issue #12): the report that is the
+  product — `buildReport` returns the ADR-0008 grade plus a leverage-ranked,
+  stability-gated fix list in expert vocabulary. Interactive **finite-difference
+  leverage** on the analytic score (no gradient engine on the interactive path):
+  each fix's rank composes the points its principle is holding down (the new
+  per-principle `atStake` — stone ceiling loss / guideline deduction, so a
+  binary-proxy fault with no local slope still ranks by its real stake) with the
+  FD sensitivity of that stake to one step of the most effective editable
+  parameter (±1.5° joints / ±2 cm ball, phase-clamped, re-grounded; stability
+  contexts pass the full gate). The **stability gate** (SPEC acceptance #5)
+  recomputes the ranking under seeded feasible micro-jitters, suppresses any fix
+  whose rank ranges wider than one position, and orders survivors by median
+  leverage — near-identical poses return the same top fix, held by test across
+  every faulted library pose. Fixes are grouped into the four **BEEF-style
+  clusters** and phrased from a per-principle **external-focus cue table**
+  (`packages/basketball/src/cues.ts`) — target/ball/arc/floor language enforced
+  by test (an unsanctioned cue may name no anatomy; 4 rows record their
+  sanctioned wording per ADR-0009). The **report JSON schema** ships at
+  `packages/core/schema/report.schema.json`, validated against every produced
+  report. Measured: ~13 ms per full report (3 fixes), ~1 ms clean — 8× inside
+  the SPEC §11.7 budget. 20 new tests.
 - **Phase-aware range scorer** (2026-08-06, issue #11): the scorer proper — a real
   measurement layer + the ADR-0008 aggregation, replacing issue #7's reference
   stub. Sport-agnostic geometry primitives and a `PoseSnapshot` world-reading
