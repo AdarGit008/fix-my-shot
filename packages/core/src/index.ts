@@ -50,6 +50,40 @@ export interface Pose {
 }
 
 // ---------------------------------------------------------------------------
+// World snapshot (what the measurement layer reads — ADR-0008 / issue #11)
+// ---------------------------------------------------------------------------
+
+/** A named skeleton landmark's world position, metres, z-up. */
+export type Keypoint = readonly [number, number, number];
+
+/**
+ * The world-space reading of one pose, produced by the engine adapter and
+ * consumed by the measurement layer: landmark positions, centre of mass, the
+ * ground support polygon, named contact flags, the implement pose, and the
+ * anthropometric normalizer. Landmark/contact/direction NAMES are supplied by
+ * the sport plugin's recipes — core fixes only the container shape (ADR-0006).
+ */
+export interface PoseSnapshot {
+  /** The pose's labelled phase id (pinned at generation — ADR-0009). */
+  readonly phase: string;
+  /** World positions of named skeleton landmarks. */
+  readonly keypoints: Readonly<Record<string, Keypoint>>;
+  /** Named unit direction vectors read off body frames (e.g. a forward axis). */
+  readonly directions: Readonly<Record<string, Keypoint>>;
+  /** World centre of mass of the body + implement system. */
+  readonly com: Keypoint;
+  /** Convex ground support polygon, xy metres (the balance referent). */
+  readonly supportPolygon: readonly (readonly [number, number])[];
+  /** Named boolean contact readings (e.g. which soles touch the ground). */
+  readonly contacts: Readonly<Record<string, boolean>>;
+  readonly implement: Implement;
+  /** Body stature in metres — the baseline's only supported normalizer. */
+  readonly stature: number;
+  /** Unit direction toward the virtual target, world frame (ADR-0009). */
+  readonly targetDirection: Keypoint;
+}
+
+// ---------------------------------------------------------------------------
 // Principles: tier + acceptance criterion
 // ---------------------------------------------------------------------------
 
@@ -116,6 +150,12 @@ export interface PrincipleResult {
   readonly principleId: string;
   readonly tier: PrincipleTier;
   readonly criterion: Criterion;
+  /**
+   * False when the current body model cannot read this principle at all (e.g.
+   * an articulation the model lacks): reported for honesty, never deducted,
+   * never surfaced as a fix. True for every principle that was actually read.
+   */
+  readonly measured: boolean;
   /** Whether the reading satisfied the criterion (in-range / present / correct direction). */
   readonly satisfied: boolean;
   /** Points this principle subtracted from the grade (0 when satisfied or style-variant). */

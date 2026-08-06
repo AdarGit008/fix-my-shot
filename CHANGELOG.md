@@ -8,6 +8,27 @@ release.
 ## [Unreleased]
 
 ### Added
+- **Phase-aware range scorer** (2026-08-06, issue #11): the scorer proper — a real
+  measurement layer + the ADR-0008 aggregation, replacing issue #7's reference
+  stub. Sport-agnostic geometry primitives and a `PoseSnapshot` world-reading
+  seam land in `@fix-my-shot/core`/`scoring` (3-point joint angles,
+  segment-vs-gravity, COM-in-support projection, target-plane offsets); the
+  basketball plugin gains its measurement recipe book
+  (`packages/basketball/src/measure.ts`) reading every measured principle off a
+  snapshot, with model honesty built in — wrist principles and cross-session
+  repeatability return *unmeasured* (reported, never deducted, never a fix)
+  because the humanoid has no wrist DOF and one frame has no history. Aggregation
+  semantics per ADR-0008 with smooth penalty curves (a broken written-in-stone
+  caps the grade at 25–60 falling with violation depth; guideline bands deduct
+  band-width-normalized with a live gradient for #12's leverage; failed
+  style-variants are FLAGGED at zero deduction). The engine adapter
+  (`apps/web/src/measure/`) reads snapshots off MuJoCo (landmarks, world COM incl.
+  ball — gate parity, support polygon, contact flags, stature) and `gradeQpos`
+  wires the whole seam. Every engineering threshold is calibrated against the
+  shipped library and documented as such: all 5 clean poses grade ≥ 95.9 with no
+  stone broken, **all 26 fault-injected poses read their injected principle**
+  (stones cap to 29.9–37.9), determinism and SPEC acceptance #3 (in-range style
+  never penalized) held by tests. 46 new tests.
 - **Pose editor** (2026-08-06, issue #10): the user-facing edit step of the core
   loop — pick a phase-labelled library pose at `?editor`, drag joints or the ball,
   and the pose visibly cannot leave its phase or physical validity. The ADR-0009
