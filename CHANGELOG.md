@@ -8,6 +8,17 @@ release.
 ## [Unreleased]
 
 ### Added
+- **Local deploy** (2026-08-06, issue #15): v0.1's finish line. The README
+  "Getting started" now runs the real thing (dev server → the loop, verify,
+  build/preview), a committed agent skill (`.claude/skills/run/SKILL.md`)
+  packages launch/drive/verify for future sessions, and demo media landed in
+  `docs/media/` (a 9 s loop GIF + four stills, captured off the production
+  bundle by a Playwright drive). The SPEC §11.7 perf budget was re-confirmed
+  on the deployed bundle after the whole v0.1 stack merged: initial load
+  **309 ms** (≤ 5 s), re-grade+report **p95 0.2 ms** (≤ 100 ms), drag **60 fps
+  observed / ~1430 fps CPU capacity** (≥ 30 fps) — **GO**. No COOP/COEP
+  headers anywhere: the MuJoCo WASM in use is the single-threaded build, so
+  any static host serves `apps/web/dist` as-is.
 - **The core loop, wired** (2026-08-06, issue #14): the default route IS the
   product — pick a phase-labelled pose from the generated library (body + ball +
   floor + the virtual target, now rendered as a rim ring + stanchion at the
