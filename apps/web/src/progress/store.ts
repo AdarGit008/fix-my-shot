@@ -166,6 +166,38 @@ export interface TopFixContinuity {
   readonly recoveredPoints: number | null;
 }
 
+/**
+ * Live continuity for the loop page (#14): the LAST STORED sitting's top fix
+ * compared against the CURRENT report (which may not be recorded yet — the
+ * page records a sitting only once the user actually edits). The caller must
+ * exclude the current sitting's own entry from `entries` when it has already
+ * been recorded.
+ */
+export function continuityAgainstReport(
+  entries: readonly SessionEntry[],
+  report: Report,
+): TopFixContinuity {
+  const none: TopFixContinuity = {
+    prior: null,
+    priorSessionId: null,
+    improved: null,
+    recoveredPoints: null,
+  };
+  const previous = entries[entries.length - 1];
+  if (!previous?.topFix) return none;
+  const prior = previous.topFix;
+  const then = previous.principles[prior.principleId];
+  const now = report.principleResults.find(
+    (r) => r.principleId === prior.principleId && r.measured,
+  );
+  if (!now || !then) {
+    return { prior, priorSessionId: previous.sessionId, improved: null, recoveredPoints: null };
+  }
+  const recoveredPoints = then.atStake - now.atStake;
+  const improved = (now.satisfied && !then.satisfied) || recoveredPoints > 1e-9;
+  return { prior, priorSessionId: previous.sessionId, improved, recoveredPoints };
+}
+
 export function topFixContinuity(entries: readonly SessionEntry[]): TopFixContinuity {
   const none: TopFixContinuity = {
     prior: null,

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { Report } from '@fix-my-shot/core';
 import {
   MAX_ENTRIES,
+  continuityAgainstReport,
   createProgressStore,
   entryFromReport,
   principleTrend,
@@ -124,6 +125,65 @@ describe('principleTrend', () => {
     expect(trend.map((t) => t.sessionId)).toEqual(['s1', 's3']);
     expect(trend[0]!.atStake).toBe(9);
     expect(trend[1]!.satisfied).toBe(true);
+  });
+});
+
+describe('continuityAgainstReport (the loop page path)', () => {
+  const fix = { principleId: 'knee', cluster: 'base', cue: 'Sink into the floor.', leverage: 9 };
+  const reportWith = (satisfied: boolean, atStake: number): Report => ({
+    grade: 80,
+    phase: 'dip',
+    fixes: [],
+    principleResults: [
+      {
+        principleId: 'knee',
+        tier: 'guideline',
+        criterion: { kind: 'band', min: 90, max: 130, unit: 'deg' },
+        measured: true,
+        satisfied,
+        deduction: atStake,
+        atStake,
+      },
+    ],
+  });
+
+  it('compares the LAST stored sitting against the live report', () => {
+    const entries = [
+      entry({
+        sessionId: 's1',
+        topFix: fix,
+        principles: { knee: { tier: 'guideline', measured: true, satisfied: false, atStake: 9 } },
+      }),
+    ];
+    const improved = continuityAgainstReport(entries, reportWith(true, 0));
+    expect(improved.prior).toEqual(fix);
+    expect(improved.improved).toBe(true);
+    expect(improved.recoveredPoints).toBeCloseTo(9);
+
+    const stuck = continuityAgainstReport(entries, reportWith(false, 9));
+    expect(stuck.improved).toBe(false);
+  });
+
+  it('answers null when the live report does not measure the prior principle', () => {
+    const entries = [
+      entry({
+        sessionId: 's1',
+        topFix: fix,
+        principles: { knee: { tier: 'guideline', measured: true, satisfied: false, atStake: 9 } },
+      }),
+    ];
+    const other: Report = { grade: 100, phase: 'stance', fixes: [], principleResults: [] };
+    const continuity = continuityAgainstReport(entries, other);
+    expect(continuity.prior).toEqual(fix);
+    expect(continuity.improved).toBeNull();
+  });
+
+  it('has nothing to pick up from an empty history or a clean last sitting', () => {
+    expect(continuityAgainstReport([], reportWith(true, 0)).prior).toBeNull();
+    expect(
+      continuityAgainstReport([entry({ sessionId: 's1', topFix: null })], reportWith(true, 0))
+        .prior,
+    ).toBeNull();
   });
 });
 
