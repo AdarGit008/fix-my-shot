@@ -3,6 +3,7 @@ import { OBJECTIVE, PHASES } from '@fix-my-shot/basketball';
 import { grade } from '@fix-my-shot/scoring';
 import { SpikePage } from './spike/SpikePage';
 import { EditorPage } from './editor/EditorPage';
+import { ProgressPanel } from './progress/ProgressPanel';
 
 // Smoke wiring of the core loop's package seam: the basketball plugin supplies the
 // objective, the sport-agnostic scorer grades it. Real UI (scene, editor, report)
@@ -17,6 +18,9 @@ export function App() {
   }
   if (params.has('editor')) {
     return <EditorPage />;
+  }
+  if (params.has('history')) {
+    return <ProgressPanel />;
   }
 
   const followThrough = PHASES.find((phase) => phase.id === 'follow-through');
