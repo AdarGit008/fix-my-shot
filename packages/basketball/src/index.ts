@@ -8,6 +8,14 @@
 
 export { PHASES, type PhaseId } from './phases';
 export {
+  EDITABLE_JOINTS,
+  GUIDE_HAND_BODY,
+  PHASE_BOUNDS,
+  SHOOTING_HAND_BODY,
+  type JointBoundsDeg,
+  type PhaseEditBounds,
+} from './bounds';
+export {
   BASELINE,
   OBJECTIVE,
   PRINCIPLES,

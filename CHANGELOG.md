@@ -8,6 +8,25 @@ release.
 ## [Unreleased]
 
 ### Added
+- **Pose editor** (2026-08-06, issue #10): the user-facing edit step of the core
+  loop — pick a phase-labelled library pose at `?editor`, drag joints or the ball,
+  and the pose visibly cannot leave its phase or physical validity. The ADR-0009
+  editable subset + per-parameter phase bounds land as basketball plugin data
+  (`packages/basketball/src/bounds.ts`: 21 hinge windows + ball height band +
+  ball↔hand tether per phase, envelope-tested against the whole shipped library);
+  the editor composes them into the gate through `createGate`'s intended seam as
+  hard QP rows (`PhaseBoundLimit`, `BallTetherLimit`, plus editor collision pairs
+  — added after the projection was caught converging into authority-rejected
+  penetration when a drag swung the guide hand into the parked ball, which made
+  two shipped poses uneditable). Drag lifecycle in a DOM-free `EditorSession`
+  (live preview → one authoritative anchor→target projection → commit or
+  reject-and-revert with a named diagnosis, undo/reset), a React page wiring
+  pointers + verdict UX, and [ADR-0010](docs/decisions/0010-drag-preview-incremental-projection.md):
+  the drag preview is the gate's own incremental projection (measured avg 0.98 ms
+  · p95 1.7 ms per pointer frame) instead of ADR-0009's CCDIKSolver bone-mirror.
+  40 new tests, including the product invariant that EVERY shipped library pose
+  accepts an in-phase nudge; verified end-to-end in a headless browser
+  (boot → faulted pose → accepted drag → undo armed, console clean).
 - **Physical-validity gate** (2026-07-28, issue #9): TypeScript port of
   [kevinzakka/mink](https://github.com/kevinzakka/mink)'s differential-IK QP
   formulation (pinned `44c8a6a`, Apache-2.0 attribution in-file) against the
