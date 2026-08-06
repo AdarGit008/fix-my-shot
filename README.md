@@ -1,12 +1,12 @@
 # fix-my-shot
 
-> **Status: build kickoff — first code has landed.** The spec of record, the
-> decision log (ADR-0002…0009), and the scorer's principle baseline are on `main`.
-> The TypeScript monorepo scaffold is up and the repo's `type` has flipped
-> `docs → node` (issue #5, per [ADR-0007](docs/decisions/0007-app-stack-and-layout.md)
-> superseding [ADR-0001](docs/decisions/0001-adopt-baseline.md)'s posture clause), so
-> the build/test readiness rules are now live. Feature work follows the **v0.1 —
-> local deploy** milestone (issues #6–#15).
+> **Status: v0.1 — local deploy — is live.** The core loop ships on `main` and
+> runs locally: `bin/setup && npm run dev` boots the trainer, `npm run
+> verify:loop` proves the loop end-to-end (9 steps, headless), and `npm run
+> spike:measure` re-checks the SPEC §11.7 perf budget on the built bundle
+> (currently **GO** across the board). The milestone (issues #6–#15) is done;
+> the spec of record, the decision log (ADR-0002…0010), and the scorer's
+> principle baseline govern everything that landed.
 
 ## What this is
 
@@ -14,7 +14,14 @@
 physically-real body+ball+floor **pose**, lets you fix the posture, re-grades the
 **form** against a research-derived baseline of shooting principles, and reports
 the ranked fixes — training **execution, not aim**; no ball flight, no make/miss
-([docs/SPEC.md](docs/SPEC.md)). Everything load-bearing is decided and captured:
+([docs/SPEC.md](docs/SPEC.md)).
+
+![the core loop: pick a faulted pose, drag a fix, watch the form re-grade](docs/media/loop-demo.gif)
+
+*Stills in [docs/media/](docs/media/): boot, ranked fixes on a faulted pose,
+an accepted edit re-graded, the history view.*
+
+Everything load-bearing is decided and captured:
 
 - **[docs/SPEC.md](docs/SPEC.md)** — the spec of record (scope, scene, acceptance criteria).
 - **[docs/principles-baseline.md](docs/principles-baseline.md)** — the scorer's single source of truth (phase-aware principle ranges, cross-verified).
@@ -33,6 +40,7 @@ packages/core/       sport-agnostic domain — names no sport concept (ADR-0006)
 packages/basketball/ the per-sport plugin: phases + principle data
 packages/scoring/    phase-aware range scorer + report model (ADR-0008)
 tools/posegen/       offline MJX pose pipeline (Python/JAX; not an npm workspace)
+.claude/skills/run/  committed agent skill: launch, drive, and verify the app
 ```
 
 ## Getting started
@@ -43,20 +51,35 @@ Requires **Node ≥ 22** (see [`.nvmrc`](.nvmrc)).
    ```bash
    bin/setup          # npm ci on a clean checkout, else npm install
    ```
-2. **Develop** — the standard workspace tasks:
+2. **Run it** — the dev server serves the core loop as the default route:
    ```bash
-   npm run dev        # Vite dev server (apps/web)
+   npm run dev        # Vite dev server (apps/web) — pick a ⚠ pose, drag, re-grade
+   ```
+   Deep links: `?history` (stored sittings), `?spike` (engine benchmark),
+   `?editor` (alias of the loop). The MuJoCo WASM in use is the
+   single-threaded build — no COOP/COEP headers, so `vite preview` or any
+   static file host serves the production build as-is.
+3. **Verify it** — committed checks that build and drive the real bundle:
+   ```bash
+   npx playwright install chromium   # once, for the headless harnesses
+   npm run verify:loop    # build + 9-step end-to-end drive of the loop
+   npm run spike:measure  # build + SPEC §11.7 perf budget → "VERDICT: GO"
+   ```
+   Agent sessions get the same via the committed
+   [`run` skill](.claude/skills/run/SKILL.md) (launch + drive + verify).
+4. **Develop** — the standard workspace tasks:
+   ```bash
    npm test           # Vitest across all packages
    npm run typecheck  # tsc --noEmit, whole repo
    npm run lint       # eslint (incl. the ADR-0006 core→plugin import boundary)
-   npm run build      # Vite production build
+   npm run build      # Vite production build (apps/web/dist)
    ```
-3. **Orient / check readiness** — derived state and the baseline score:
+5. **Orient / check readiness** — derived state and the baseline score:
    ```bash
    node "$HOME/.claude/skills/baseline/baseline.mjs" orient --repo .
    node "$HOME/.claude/skills/baseline/baseline.mjs" check  --repo .
    ```
-4. **Read the definitions.** Start with [`docs/SPEC.md`](docs/SPEC.md), then the
+6. **Read the definitions.** Start with [`docs/SPEC.md`](docs/SPEC.md), then the
    decisions in [`docs/decisions/`](docs/decisions/).
 
 ## How this repo is governed
